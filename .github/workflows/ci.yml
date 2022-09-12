@@ -1,4 +1,4 @@
-name: release
+name: ci
 
 on:
   push:
@@ -6,17 +6,11 @@ on:
       - main
 
 jobs: 
-  build_deploy:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Publish Module to PowerShell Gallery
-        uses: pcgeek86/publish-powershell-module-action@v20
-        id: publish-module
-        with:
-          NuGetApiKey: ${{ secrets.PS_GALLERY_KEY }}
 
       - name: Install PowerShell dependencies
         shell: pwsh
