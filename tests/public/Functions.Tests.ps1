@@ -1,4 +1,4 @@
-$functions = Get-ChildItem (Split-Path $PSCommandPath).replace('\tests\public', '\src\public\*.ps1')
+$functions = Get-ChildItem ($PSScriptRoot.Replace('\tests\public', '\src\public\*.ps1'))
 foreach ($function in $functions) {
   Describe "Verify $($function.BaseName)" -ForEach @{ Function = $function } {
     It "Should have a test file" {
