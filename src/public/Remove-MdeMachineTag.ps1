@@ -1,12 +1,10 @@
 function Remove-MdeMachineTag {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory,
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $id,
-    [Parameter(Mandatory,
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $tag
   )

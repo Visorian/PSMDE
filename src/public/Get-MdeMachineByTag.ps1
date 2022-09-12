@@ -1,11 +1,10 @@
 function Get-MdeMachineByTag {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory, 
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $tag,
-    [Parameter(ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [boolean]
     $useStartsWithFilter = $false
   )

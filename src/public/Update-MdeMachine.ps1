@@ -4,10 +4,10 @@ function Update-MdeMachine {
     [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $id,
-    [Parameter(ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [array]
     $tags,
-    [Parameter(ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [ValidateSet('Low', 'Normal', 'High')]
     [string]
     $priority

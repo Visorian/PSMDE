@@ -15,10 +15,13 @@
 function Set-MDEAuthorizationInfo {
   [CmdletBinding()]
   param (
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $tenantId,
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $appId,
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $appSecret,
     [switch]

@@ -1,8 +1,7 @@
 function Get-MdeMachineLogonUsers {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory,
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $id
   )

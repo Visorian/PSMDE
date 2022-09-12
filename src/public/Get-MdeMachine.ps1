@@ -1,7 +1,7 @@
 function Get-MdeMachine {
   [CmdletBinding()]
   param (
-    [Parameter(ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $id
   )

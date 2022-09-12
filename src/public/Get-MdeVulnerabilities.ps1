@@ -28,8 +28,7 @@
 function Get-MdeVulnerabilities {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory,
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [ValidateSet("Low", "Medium", "High", "Critical")]  
     [string]
     $severity

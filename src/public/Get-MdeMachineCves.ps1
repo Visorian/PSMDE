@@ -1,8 +1,7 @@
 function Get-MdeMachineCves {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory,
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [ValidateSet("Low", "Medium", "High", "Critical")]  
     [string]
     $severity

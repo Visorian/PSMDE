@@ -1,11 +1,10 @@
 function Get-MdeMachineByIp {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory, 
-      ValueFromPipelineByPropertyName)]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $ip,
-    [Parameter(ValueFromPipelineByPropertyName)]
+    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [ValidateScript({ $_ -gt ([DateTime]::now).AddDays(-30) })]
     [datetime]
     $timestamp = [DateTime]::Now
