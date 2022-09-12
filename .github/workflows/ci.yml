@@ -1,0 +1,68 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs: 
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Publish Module to PowerShell Gallery
+        uses: pcgeek86/publish-powershell-module-action@v20
+        id: publish-module
+        with:
+          NuGetApiKey: ${{ secrets.PS_GALLERY_KEY }}
+
+      - name: Install PowerShell dependencies
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module platyps, PSScriptAnalyzer -force
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse -ReportSummary -Severity Error
+
+      - name: Run Tests
+        shell: pwsh
+        run: |
+          Invoke-Pester
+
+      - name: Generate public help
+        shell: pwsh
+        run: |
+          Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
+          Remove-item .\docs\ -Recurse -Force
+          Remove-item .\en-us\ -Recurse -Force
+          Import-Module .\src\PSMDE.psd1
+          $parameters = @{
+            Module = 'PSMDE'
+            OutputFolder = 'docs'
+            AlphabeticParamsOrder = $true
+            WithModulePage = $true
+            ExcludeDontShow = $true
+            Encoding = [System.Text.Encoding]::UTF8
+          }
+          New-MarkdownHelp @parameters -Force
+          New-ExternalHelp -Path '.\docs' -OutputPath '.\en-us'
+
+      - name: Upload public help
+        uses: bacongobbler/azure-blob-storage-upload@main
+        with:
+          source_dir: en-us
+          container_name: help
+          connection_string: ${{ secrets.STORAGE_CONNECTION_STRING }}
+          overwrite: 'true'
+
+      - name: Commit updated markdown help
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs(external-help): :memo: Updated external help"
+          commit_user_email: jdamaschke@visorian.com
+          branch: main

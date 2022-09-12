@@ -6,13 +6,12 @@
 .NOTES
   Author: Jan-Henrik Damaschke
 .LINK
-  For creating a service principal and granting it the correct permissions:
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exposed-apis-create-app-webapp?view=o365-worldwide
 .EXAMPLE
-  Set-MDEAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
+  Set-MdeAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
 #>
 
-function Set-MDEAuthorizationInfo {
+function Set-MdeAuthorizationInfo {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]

@@ -142,7 +142,7 @@
   } # End of PrivateData hashtable
 
   # HelpInfo URI of this module
-  # HelpInfoURI = ''
+  HelpInfoURI = 'https://psmdehelpfiles.blob.core.windows.net/help/PSMDE-help.xml'
 
   # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
   # DefaultCommandPrefix = ''
