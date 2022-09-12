@@ -1,6 +1,6 @@
 BeforeAll {
   Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
-  Import-Module (Split-Path $PSCommandPath).replace('\tests\public', '\src\PSMDE.psd1')
+  Import-Module (Split-Path $PSCommandPath).replace('tests', 'src').Replace('public', 'PSMDE.psd1')
 }
 
 Describe "Get-MdeMachine" {
