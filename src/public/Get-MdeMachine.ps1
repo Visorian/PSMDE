@@ -13,6 +13,9 @@
   
 .EXAMPLE
   $machine = Get-MdeMachine -id '123'
+
+.ROLE
+  @(@{permission = 'Machine.Read.All'; permissionType = 'Application'}, @{permission = 'Machine.ReadWrite.All'; permissionType = 'Application'}, @{permission = 'Machine.Read'; permissionType = 'Delegated'}, @{permission = 'Machine.ReadWrite'; permissionType = 'Delegated'})
 #>
 
 function Get-MdeMachine {

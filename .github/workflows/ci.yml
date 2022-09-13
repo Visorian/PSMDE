@@ -25,8 +25,15 @@ jobs:
 
       - name: Run Tests
         shell: pwsh
+        continue-on-error: true
         run: |
-          Invoke-Pester
+          Invoke-Pester -ci
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pester-Tests
+          path: testResults.xml
 
       - name: Generate public help
         shell: pwsh

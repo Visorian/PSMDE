@@ -1,4 +1,6 @@
 function Get-MdeAuthorizationInfo {
+  [CmdletBinding()]
+  param ()
   if ($script:tokenCache) {
     $tc = Get-AesSessionSecret -cipherText $script:tokenCache
     $parsedToken = Get-ParsedToken -token $tc

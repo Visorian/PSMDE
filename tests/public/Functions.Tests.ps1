@@ -1,6 +1,7 @@
 $functions = Get-ChildItem (Split-Path $PSCommandPath).Replace('tests', 'src') -Filter *.ps1
 foreach ($function in $functions) {
   Describe "Verify $($function.BaseName)" -ForEach @{ Function = $function } {
+
     It "Should have a test file" {
       Test-Path ($function.FullName.Replace('src', 'tests').Replace('.ps1', '.Tests.ps1')) | Should -Be $true
     }
@@ -21,7 +22,6 @@ foreach ($function in $functions) {
     It "Should have advanced function parameters" {
       $function.FullName | should -FileContentMatch 'function'
       $function.FullName | should -FileContentMatch 'cmdletbinding'
-      $function.FullName | should -FileContentMatch 'param'
     }
   }
 }

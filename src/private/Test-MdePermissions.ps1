@@ -1,11 +1,11 @@
 function Test-MdePermissions {
   [CmdletBinding()]
   param (
-    [Parameter()]
+    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $cmdletName
   )
-  $scopes = (Get-MDEAuthorizationInfo).scopes
+  $scopes = (Get-MdeAuthorizationInfo).scopes
   $requiredRoles = (Get-Help $cmdletName -Full).role | Invoke-Expression
   $containsRole = $false
   foreach ($role in $requiredRoles) {

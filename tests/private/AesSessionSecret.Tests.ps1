@@ -9,6 +9,11 @@ Describe 'AesSessionSecrets' {
     New-Variable -Scope Script -Name secret -Value 'Test123' -Force
   }
 
+  It 'Should have access to local variables' {
+    $encryptedSecret | Should -BeNullOrEmpty
+    $secret | Should -Be 'Test123'
+  }
+
   It 'Can encrypt a secret' {
     $encryptedSecret = New-AesSessionSecret -secret $secret
     $encryptedSecret | Should -Not -BeNullOrEmpty

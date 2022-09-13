@@ -31,5 +31,5 @@ function Set-MdeAuthorizationInfo {
   $script:appSecret = New-AesSessionSecret -secret $appSecret
 
   Write-Verbose "Refreshing access token"
-  if (-not $noTokenRefresh) { $null = Get-MDEAuthorizationHeader }
+  if (-not $noTokenRefresh) { $null = Get-MdeAuthorizationHeader }
 }
