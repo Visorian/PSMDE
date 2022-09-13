@@ -18,6 +18,21 @@ foreach ($function in $functions) {
     It "Should have a EXAMPLE help section" {
       $function.FullName | should -FileContentMatch '.EXAMPLE'
     }
+
+    It "Should have a ROLE help section with an array of hashtables" {
+      $exclusions = @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo')
+      if ($exclusions -notcontains $function.BaseName) {
+        $function.FullName | should -FileContentMatch '.ROLE'
+        . $function.FullName
+        $roleString = (Get-Help $function.BaseName).role
+        $roleString | Should -Not -BeNullOrEmpty
+        $roleString | Invoke-Expression | Should -BeOfType System.Collections.Hashtable
+      }
+    }
+
+    It "Should use Test-MdePermissions to validate current permissions" {
+      $function.FullName | should -FileContentMatch 'Test-MdePermissions'
+    }
     
     It "Should have advanced function parameters" {
       $function.FullName | should -FileContentMatch 'function'
