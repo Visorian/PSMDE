@@ -13,7 +13,6 @@
 
 .EXAMPLE
   Set-MdeAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
-
 #>
 
 function Set-MdeAuthorizationInfo {
