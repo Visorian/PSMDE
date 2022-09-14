@@ -5,26 +5,25 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-MdeAuthorizationInfo
+# Clear-MdeAuthorizationInfo
 
 ## SYNOPSIS
-Returns the authorization information that is used to get a valid MDE token.
+Clears the authorization information that is used to get a valid MDE token.
 
 ## SYNTAX
 
 ```
-Get-MdeAuthorizationInfo [<CommonParameters>]
+Clear-MdeAuthorizationInfo [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns the authorization information that is used to get a valid MDE token including current token expiration state and current token roles.
-To clear, please use the Clear-MdeAuthorizationInfo function.
+Clears the authorization information that is used to get a valid MDE token.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-MdeAuthorizationInfo
+Clear-MdeAuthorizationInfo
 ```
 
 ## PARAMETERS
