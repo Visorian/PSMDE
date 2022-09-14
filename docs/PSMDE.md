@@ -14,6 +14,9 @@ Locale: en-US
 ### [Add-MdeMachineTag](Add-MdeMachineTag.md)
 {{ Fill in the Description }}
 
+### [Clear-MdeAuthorizationInfo](Clear-MdeAuthorizationInfo.md)
+{{ Fill in the Description }}
+
 ### [Get-MdeAuthorizationInfo](Get-MdeAuthorizationInfo.md)
 {{ Fill in the Description }}
 
@@ -48,6 +51,9 @@ Locale: en-US
 {{ Fill in the Description }}
 
 ### [Get-MdeMachineVulnerabilities](Get-MdeMachineVulnerabilities.md)
+{{ Fill in the Description }}
+
+### [Get-MdeRoles](Get-MdeRoles.md)
 {{ Fill in the Description }}
 
 ### [Get-MdeVulnerabilities](Get-MdeVulnerabilities.md)
