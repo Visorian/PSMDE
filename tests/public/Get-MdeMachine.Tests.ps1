@@ -20,14 +20,16 @@ Describe "Get-MdeMachine" {
   It 'Should call Invoke-RetryRequest when id parameter is provided' {
     InModuleScope PSMDE {
       Mock Invoke-RetryRequest { }
+      Mock Test-MdePermissions { return $true }
       Get-MdeMachine -id '123'
       Should -Invoke Invoke-RetryRequest
     }
   }
 
-  It 'Should call Invoke-AzureRequest when id parameter is provided' {
+  It 'Should call Invoke-AzureRequest when no parameter is provided' {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { }
+      Mock Test-MdePermissions { return $true }
       Get-MdeMachine
       Should -Invoke Invoke-AzureRequest
     }

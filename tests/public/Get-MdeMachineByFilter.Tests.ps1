@@ -20,6 +20,7 @@ Describe "Get-MdeMachineByFilter" {
   It 'Should call Invoke-AzureRequest' {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { }
+      Mock Test-MdePermissions { return $true }
       Get-MdeMachineByFilter -filter "healthStatus eq 'Active'"
       Should -Invoke Invoke-AzureRequest
     }
