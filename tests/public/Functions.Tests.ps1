@@ -20,7 +20,7 @@ foreach ($function in $functions) {
     }
 
     It "Should have a ROLE help section with an array of hashtables" {
-      $exclusions = @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo')
+      $exclusions = @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo', 'Clear-MdeAuthorizationInfo', 'Get-MdeRoles')
       if ($exclusions -notcontains $function.BaseName) {
         $function.FullName | should -FileContentMatch '.ROLE'
         . $function.FullName

@@ -18,8 +18,8 @@ Describe 'Test-MdePermissions' {
 
   It 'Should call Get-MdeAuthorizationInfo' {
     InModuleScope PSMDE {
-      Mock Get-MdeAuthorizationInfo { return @{scopes = @('Machine.Read.All', 'User.Read.All') } }
-      Test-MdePermissions -cmdletName 'Get-MdeMachine'
+      Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.Read.All', 'User.Read.All') } }
+      Test-MdePermissions -functionName 'Get-MdeMachine'
       Should -Invoke Get-MdeAuthorizationInfo
     }
   }
@@ -30,17 +30,38 @@ Describe 'Test-MdePermissions' {
     $requiredRoles.Values | Should -Be $cmdletRoles.Values
   }
 
-  It 'Should return true, if scopes are in token' {
+  It 'Should return true, if roles are in token' {
     InModuleScope PSMDE {
-      Mock Get-MdeAuthorizationInfo { return @{scopes = @('Machine.Read.All', 'User.Read.All') } }
-      Test-MdePermissions -cmdletName 'Get-MdeMachine' | Should -Be $true
+      Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.Read.All', 'User.Read.All') } }
+      Test-MdePermissions -functionName 'Get-MdeMachine' | Should -Be $true
     }
   }
 
-  It 'Should return false, if scopes not in token' {
+  It 'Should return false, if roles not in token' {
     InModuleScope PSMDE {
-      Mock Get-MdeAuthorizationInfo { return @{scopes = @('User.Read.All') } }
-      Test-MdePermissions -cmdletName 'Get-MdeMachine' | Should -Be $false
+      Mock Get-MdeAuthorizationInfo { return @{roles = @('User.Read.All') } }
+      Test-MdePermissions -functionName 'Get-MdeMachine' | Should -Be $false
+    }
+  }
+
+  It 'Should return object, when detailed parameter is specified' {
+    InModuleScope PSMDE {
+      $permissions = @{
+        validTokenPermission = $false
+        requiredRoles        = @('Machine.Read.All', 'Machine.ReadWrite.All', 'Machine.Read', 'Machine.ReadWrite')
+        currentRoles         = @('User.Read.All')
+      }
+      Mock Get-MdeAuthorizationInfo { return @{roles = @('User.Read.All') } }
+      $result = Test-MdePermissions -functionName 'Get-MdeMachine' -detailed
+      $result | Should -BeOfType Hashtable
+      foreach ($key in $result.Keys) {
+        if ($result[$key].gettype() -eq [Object[]]) {
+          $result[$key] | ForEach-Object { $permissions[$key] -contains $_ | Should -Be $true }
+        }
+        else {
+          Should -Be -ActualValue $result[$key] -ExpectedValue $permissions[$key]
+        }
+      }
     }
   }
 }

@@ -24,7 +24,7 @@ Describe "Get-MdeAuthorizationInfo" {
       Mock Get-ParsedToken { }
       $result = Get-MdeAuthorizationInfo
       $result.Keys | Should -Contain 'tokenExpired'
-      $result.Keys | Should -Contain 'scopes'
+      $result.Keys | Should -Contain 'roles'
       Should -Invoke Get-AesSessionSecret
       Should -Invoke Get-ParsedToken
     }

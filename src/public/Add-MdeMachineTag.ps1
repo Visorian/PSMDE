@@ -25,14 +25,19 @@ function Add-MdeMachineTag {
     [string]
     $tag
   )
-  if (Test-MdePermissions -cmdletName $PSCmdlet.CommandRuntime) {
+  Begin {
+    if (-not (Test-MdePermissions -functionName $PSCmdlet.CommandRuntime)) {
+      $requiredRoles = (Get-Help $PSCmdlet.CommandRuntime -Full).role | Invoke-Expression
+      Write-Error "Missing required permissions. Please check if one of these is in token scope: $($requiredRoles.permission)"
+      Throw
+    }
+  }
+  Process {
     $body = @{
       Value  = $tag
       Action = 'Add'
     }
-    return Invoke-RetryRequest -Method Post -body (ConvertTo-Json -InputObject $body) -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/tags"
-  } else {
-    $requiredRoles = (Get-Help $PSCmdlet.CommandRuntime -Full).role | Invoke-Expression
-    Write-Error "Missing required permissions. Please check if one of these is in token scope: $($requiredRoles.permission)"
+    return Invoke-RetryRequest -Method Post -body (ConvertTo-Json -InputObject $body) -Uri "https://api.securitycenter.microsoft.com/api/machines/$($_.id)/tags"
   }
+  End {}
 }

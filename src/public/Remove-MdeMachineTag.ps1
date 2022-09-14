@@ -25,7 +25,7 @@ function Remove-MdeMachineTag {
     [string]
     $tag
   )
-  if (Test-MdePermissions -cmdletName $PSCmdlet.CommandRuntime) {
+  if (Test-MdePermissions -functionName $PSCmdlet.CommandRuntime) {
     $body = @{
       Value  = $tag
       Action = 'Remove'
