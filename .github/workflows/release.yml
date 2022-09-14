@@ -26,7 +26,7 @@ jobs:
           $cert = Import-PfxCertificate -FilePath $certPath -Password ($env:SIGNING_PASSWORD | ConvertTo-SecureString -AsPlainText -Force) -CertStoreLocation Cert:\CurrentUser\My
           Get-ChildItem src -Recurse -Force -Filter *.ps* | Set-AuthenticodeSignature -Certificate $cert
           Copy-Item .\src\ -Recurse -Destination .\PSMDE\ -Force
-          Publish-Module -Path .\PSMDE\ -NuGetApiKey $env:NUGET_KEY
+          Publish-Module -Path .\PSMDE\ -NuGetApiKey $env:NUGET_KEY -AllowPrerelease
 
       - run: npx changelogithub
         env:

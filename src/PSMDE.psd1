@@ -12,7 +12,7 @@
   RootModule        = 'PSMDE.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.3.0'
+  ModuleVersion     = '0.4.0'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -116,7 +116,7 @@
     PSData = @{
 
       # Tags applied to this module. These help with module discovery in online galleries.
-      # Tags = @()
+      Tags = @('Microsoft Defender for Endpoint', 'Security', 'Defender')
 
       # A URL to the license for this module.
       LicenseUri = ''
