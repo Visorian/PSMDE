@@ -1,14 +1,14 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exposed-apis-create-app-webapp?view=o365-worldwide
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/update-machine-method?view=o365-worldwide
 schema: 2.0.0
 ---
 
 # Update-MdeMachine
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Updates properties of existing Machine.
 
 ## SYNTAX
 
@@ -17,16 +17,19 @@ Update-MdeMachine [-id] <String> [[-tags] <Array>] [[-priority] <String>] [<Comm
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Updates properties of existing Machine.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```
+Update-MdeMachine -id '123' -tags @('tag-1', 'tag-2')
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```
+Update-MdeMachine -id '123' -priority 'High'
+```
 
 ## PARAMETERS
 
@@ -39,7 +42,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -52,10 +55,9 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: Low, Normal, High
 
 Required: False
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -70,7 +72,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -81,11 +83,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-### System.Array
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Jan-Henrik Damaschke
 
 ## RELATED LINKS
+
+[https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/update-machine-method?view=o365-worldwide](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/update-machine-method?view=o365-worldwide)
+

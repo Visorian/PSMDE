@@ -1,7 +1,7 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-discovered-vulnerabilities?view=o365-worldwide
 schema: 2.0.0
 ---
 

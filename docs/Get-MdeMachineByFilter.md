@@ -1,7 +1,7 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version:
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-related-alerts?view=o365-worldwide
 schema: 2.0.0
 ---
 
