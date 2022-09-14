@@ -20,9 +20,6 @@ Locale: en-US
 ### [Get-MdeAuthorizationInfo](Get-MdeAuthorizationInfo.md)
 {{ Fill in the Description }}
 
-### [Get-MdeCveMachineReferences](Get-MdeCveMachineReferences.md)
-{{ Fill in the Description }}
-
 ### [Get-MdeMachine](Get-MdeMachine.md)
 {{ Fill in the Description }}
 
@@ -36,9 +33,6 @@ Locale: en-US
 {{ Fill in the Description }}
 
 ### [Get-MdeMachineByTag](Get-MdeMachineByTag.md)
-{{ Fill in the Description }}
-
-### [Get-MdeMachineCves](Get-MdeMachineCves.md)
 {{ Fill in the Description }}
 
 ### [Get-MdeMachineLogonUsers](Get-MdeMachineLogonUsers.md)
@@ -59,10 +53,13 @@ Locale: en-US
 ### [Get-MdeRoles](Get-MdeRoles.md)
 {{ Fill in the Description }}
 
-### [Get-MdeVulnerabilities](Get-MdeVulnerabilities.md)
+### [Get-MdeVulnerability](Get-MdeVulnerability.md)
 {{ Fill in the Description }}
 
-### [Get-MdeVulnerability](Get-MdeVulnerability.md)
+### [Get-MdeVulnerabilityByMachine](Get-MdeVulnerabilityByMachine.md)
+{{ Fill in the Description }}
+
+### [Get-MdeVulnerabilityMachinesByVulnerability](Get-MdeVulnerabilityMachinesByVulnerability.md)
 {{ Fill in the Description }}
 
 ### [Remove-MdeMachineTag](Remove-MdeMachineTag.md)

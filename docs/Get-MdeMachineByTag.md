@@ -1,14 +1,14 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version:
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-tag?view=o365-worldwide
 schema: 2.0.0
 ---
 
 # Get-MdeMachineByTag
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Find Machines by Tag.
 
 ## SYNTAX
 
@@ -17,16 +17,17 @@ Get-MdeMachineByTag [-tag] <String> [[-useStartsWithFilter] <Boolean>] [<CommonP
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Find Machines by Tag.
+The optional parameter useStartsWithFilter sets the matching to lazy matching the start of the machine name.
+E.g.
+-tag 'tag-' will match 'tag-1', 'tag-123', etc..
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-MdeMachineByTag -tag 'tag-01'
+```
 
 ## PARAMETERS
 
@@ -39,7 +40,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -54,8 +55,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: False
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
@@ -65,11 +66,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-### System.Boolean
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Jan-Henrik Damaschke
 
 ## RELATED LINKS
+
+[https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-tag?view=o365-worldwide](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-tag?view=o365-worldwide)
+

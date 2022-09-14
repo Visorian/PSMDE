@@ -1,14 +1,14 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-security-recommendations?view=o365-worldwide
 schema: 2.0.0
 ---
 
 # Get-MdeMachineRecommendations
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieves a collection of security recommendations related to a given device ID.
 
 ## SYNTAX
 
@@ -17,16 +17,14 @@ Get-MdeMachineRecommendations [-id] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves a collection of security recommendations related to a given device ID.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-MdeMachineRecommendations -id '123'
+```
 
 ## PARAMETERS
 
@@ -39,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -50,10 +48,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Jan-Henrik Damaschke
 
 ## RELATED LINKS
+
+[https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-security-recommendations?view=o365-worldwide](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-security-recommendations?view=o365-worldwide)
+

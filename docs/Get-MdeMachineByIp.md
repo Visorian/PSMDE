@@ -1,14 +1,14 @@
 ﻿---
 external help file: PSMDE-help.xml
 Module Name: PSMDE
-online version:
+online version: https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-ip?view=o365-worldwide
 schema: 2.0.0
 ---
 
 # Get-MdeMachineByIp
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Find Machines seen with the requested internal IP in the time range of 15 minutes prior and after a given timestamp.
 
 ## SYNTAX
 
@@ -17,16 +17,14 @@ Get-MdeMachineByIp [-ip] <String> [[-timestamp] <DateTime>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Find Machines seen with the requested internal IP in the time range of 15 minutes prior and after a given timestamp.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-MdeMachineByIp -ip '192.168.1.1'
+```
 
 ## PARAMETERS
 
@@ -39,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
@@ -54,8 +52,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: [DateTime]::Now
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
@@ -65,11 +63,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-### System.DateTime
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Author: Jan-Henrik Damaschke
 
 ## RELATED LINKS
+
+[https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-ip?view=o365-worldwide](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-ip?view=o365-worldwide)
+
