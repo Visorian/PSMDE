@@ -29,6 +29,9 @@ Locale: en-US
 ### [Get-MdeMachineAlerts](Get-MdeMachineAlerts.md)
 {{ Fill in the Description }}
 
+### [Get-MdeMachineByFilter](Get-MdeMachineByFilter.md)
+{{ Fill in the Description }}
+
 ### [Get-MdeMachineByIp](Get-MdeMachineByIp.md)
 {{ Fill in the Description }}
 
