@@ -1,24 +1,31 @@
 name: release
 
 on:
+  release:
+    types: [created]
   workflow_dispatch:
 
-jobs: 
+jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-2022
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Publish Module to PowerShell Gallery
-        uses: pcgeek86/publish-powershell-module-action@v20
-        id: publish-module
-        with:
-          NuGetApiKey: ${{ secrets.PS_GALLERY_KEY }}
-
-      - name: Build and publish
+      - name: Sign and publish
         env:
           NUGET_KEY: ${{ secrets.PS_GALLERY_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERT }}
         shell: pwsh
         run: |
-          Publish-Module -Path /tmp/samplemodule -NuGetApiKey $env:NUGET_KEY -Verbose
+          $certPath = Join-Path -Path $PSScriptRoot -ChildPath "code_signing.pfx"
+          Set-Content -Value $([System.Convert]::FromBase64String($env:SIGNING_CERTIFICATE)) -Path $certPath -AsByteStream
+          $cert = Import-PfxCertificate -FilePath $certPath -Password ($env:SIGNING_PASSWORD | ConvertTo-SecureString -AsPlainText -Force) -CertStoreLocation Cert:\CurrentUser\My
+          Get-ChildItem src -Recurse -Force -Filter *.ps* | Set-AuthenticodeSignature -Certificate $cert
+          Copy-Item .\src\ -Recurse -Destination .\PSMDE\ -Force
+          Publish-Module -Path .\PSMDE\ -NuGetApiKey $env:NUGET_KEY
+
+      - run: npx changelogithub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

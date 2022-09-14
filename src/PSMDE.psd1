@@ -12,7 +12,7 @@
   RootModule        = 'PSMDE.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.2.0'
+  ModuleVersion     = '0.3.0'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -119,10 +119,10 @@
       # Tags = @()
 
       # A URL to the license for this module.
-      # LicenseUri = ''
+      LicenseUri = ''
 
       # A URL to the main website for this project.
-      ProjectUri = 'https://github.com/itpropro/PSMDE'
+      ProjectUri = 'https://github.com/Visorian/PSMDE'
 
       # A URL to an icon representing this module.
       # IconUri = ''
