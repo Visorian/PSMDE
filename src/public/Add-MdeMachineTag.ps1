@@ -37,7 +37,7 @@ function Add-MdeMachineTag {
       Value  = $tag
       Action = 'Add'
     }
-    return Invoke-RetryRequest -Method Post -body (ConvertTo-Json -InputObject $body) -Uri "https://api.securitycenter.microsoft.com/api/machines/$($_.id)/tags"
+    return Invoke-RetryRequest -Method Post -body (ConvertTo-Json -InputObject $body) -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/tags"
   }
   End {}
 }

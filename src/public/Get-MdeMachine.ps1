@@ -25,8 +25,10 @@ function Get-MdeMachine {
     [string]
     $id
   )
-  if ($id) {
-    return Invoke-RetryRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id"
+  Process {
+    if ($id) {
+      return Invoke-RetryRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id"
+    }
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines"
   }
-  return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines"
 }
