@@ -8,6 +8,12 @@
 .NOTES
   Author: Jan-Henrik Damaschke
 
+.PARAMETER id
+  Optional. Specifies the id of the target MDE machine.
+
+.OUTPUTS
+  PSCustomObject. The Get-MdeMachine function returns a list of or a single PSCustomObject containing the parsed MDE machine object.
+
 .EXAMPLE
   $machines = Get-MdeMachine
   

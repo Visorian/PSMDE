@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: Install PowerShell dependencies
         shell: pwsh
@@ -67,19 +69,9 @@ jobs:
         shell: pwsh
         run: |
           Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
-          Remove-item .\docs\ -Recurse -Force
-          Remove-item .\en-us\ -Recurse -Force
           Import-Module .\src\PSMDE.psd1
-          $parameters = @{
-            Module = 'PSMDE'
-            OutputFolder = 'docs'
-            AlphabeticParamsOrder = $true
-            WithModulePage = $true
-            ExcludeDontShow = $true
-            Encoding = [System.Text.Encoding]::UTF8
-          }
-          New-MarkdownHelp @parameters -Force
-          New-ExternalHelp -Path '.\docs' -OutputPath '.\en-us'
+          Update-MarkdownHelpModule -Path 'wiki' -RefreshModulePage -UpdateInputOutput -Force
+          New-ExternalHelp -Path 'wiki' -OutputPath 'en-us' -Force
 
       - name: Upload public help
         uses: LanceMcCarthy/Action-AzureBlobUpload@v2
@@ -88,6 +80,13 @@ jobs:
           container_name: help
           source_folder: en-us
           delete_if_exists: true
+
+      - name: Commit updated markdown help
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "docs(help): :memo: Updated external help and coverage"
+          commit_user_email: jdamaschke@visorian.com
+          branch: main
 
       - name: Bump version and tag
         uses: mathieudutour/github-tag-action@v6.0
@@ -103,16 +102,16 @@ jobs:
           TAG_NAME: ${{ steps.tag_version.outputs.new_tag }}
         run: |
           $release = $env:TAG_NAME.replace('v', '')
-          $help = Get-Content ./docs/PSMDE.md
+          $help = Get-Content ./wiki/PSMDE.md
           $help = $help | foreach-object { $_ -replace '(?<prefix>^.?Help Version: )(.+)(?<suffix>)$', "`${prefix}$release`${suffix}" }
-          $help | Out-File ./docs/PSMDE.md -Force -Encoding ascii
+          $help | Out-File ./wiki/PSMDE.md -Force -Encoding ascii
           $manifest = Get-Content ./src/PSMDE.psd1
           $manifest = $manifest | foreach-object { $_ -replace "(?<prefix>^\s+ModuleVersion     = ')(.+)(?<suffix>')$", "`${prefix}$release`${suffix}" } 
           $manifest | Out-File ./src/PSMDE.psd1 -Force -Encoding ascii
 
-      - name: Commit updated markdown help and version files
+      - name: Commit updated version files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "docs(external-help): :memo: Updated external help"
+          commit_message: "chore(release): :bookmark: Bump version to ${{ steps.tag_version.outputs.new_tag }}"
           commit_user_email: jdamaschke@visorian.com
           branch: main
