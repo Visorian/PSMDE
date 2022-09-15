@@ -8,6 +8,12 @@
 .NOTES
   Author: Jan-Henrik Damaschke
 
+.PARAMETER id
+  Optional. Specifies the id of the target MDE machine.
+
+.OUTPUTS
+  PSCustomObject. The Get-MdeMachine function returns a list of or a single PSCustomObject containing the parsed MDE machine logon user list.
+
 .LINK
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-log-on-users?view=o365-worldwide
 

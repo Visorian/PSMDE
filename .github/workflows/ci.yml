@@ -117,7 +117,7 @@ jobs:
           git config --global user.email 'jdamaschke@visorian.com'
           git add -A
           git commit -m $commitMessage
-          git push
+          git push origin HEAD:master
 
       - name: Commit updated version files
         uses: stefanzweifel/git-auto-commit-action@v4
