@@ -116,7 +116,7 @@
     PSData = @{
 
       # Tags applied to this module. These help with module discovery in online galleries.
-      Tags = @('Microsoft Defender for Endpoint', 'Security', 'Defender')
+      Tags = @('MDE', 'Endpoint', 'Security', 'Defender', 'ATP', 'Defender-ATP')
 
       # A URL to the license for this module.
       LicenseUri = ''
