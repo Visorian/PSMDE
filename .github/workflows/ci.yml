@@ -58,14 +58,35 @@ jobs:
           New-ExternalHelp -Path '.\docs' -OutputPath '.\en-us'
 
       - name: Upload public help
-        uses: bacongobbler/azure-blob-storage-upload@main
+        uses: LanceMcCarthy/Action-AzureBlobUpload@v2
         with:
-          source_dir: en-us
-          container_name: help
           connection_string: ${{ secrets.STORAGE_CONNECTION_STRING }}
-          overwrite: 'true'
+          container_name: help
+          source_folder: en-us
+          delete_if_exists: true
 
-      - name: Commit updated markdown help
+      - name: Bump version and tag
+        uses: mathieudutour/github-tag-action@v6.0
+        id: tag_version
+        with:
+          github_token: ${{ secrets.PSMDE_REPO }}
+          release_branches: main
+
+      - name: Update manifest and help version
+        if: ${{ steps.tag_version.outputs.new_tag }}
+        shell: pwsh
+        env:
+          TAG_NAME: ${{ steps.tag_version.outputs.new_tag }}
+        run: |
+          $release = $env:TAG_NAME.replace('v', '')
+          $help = Get-Content ./docs/PSMDE.md
+          $help = $help | foreach-object { $_ -replace '(?<prefix>^.?Help Version: )(.+)(?<suffix>)$', "`${prefix}$release`${suffix}" }
+          $help | Out-File ./docs/PSMDE.md -Force -Encoding ascii
+          $manifest = Get-Content ./src/PSMDE.psd1
+          $manifest = $manifest | foreach-object { $_ -replace "(?<prefix>^\s+ModuleVersion     = ')(.+)(?<suffix>')$", "`${prefix}$release`${suffix}" } 
+          $manifest | Out-File ./src/PSMDE.psd1 -Force -Encoding ascii
+
+      - name: Commit updated markdown help and version files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "docs(external-help): :memo: Updated external help"

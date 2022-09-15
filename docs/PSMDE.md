@@ -1,14 +1,14 @@
-﻿---
+---
 Module Name: PSMDE
 Module Guid: 5fef5bda-5b7b-4eff-a0aa-5e5cd85dc452
-Download Help Link: {{ Update Download Link }}
-Help Version: {{ Please enter version of help manually (X.X.X.X) format }}
+Download Help Link: https://psmdehelpfiles.blob.core.windows.net/help/PSMDE-help.xml
+Help Version: 0.4.0
 Locale: en-US
 ---
 
 # PSMDE Module
 ## Description
-{{ Fill in the Description }}
+Microsoft Defender for Endpoint (MDE) PowerShell module
 
 ## PSMDE Cmdlets
 ### [Add-MdeMachineTag](Add-MdeMachineTag.md)
