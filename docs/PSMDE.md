@@ -2,7 +2,7 @@
 Module Name: PSMDE
 Module Guid: 5fef5bda-5b7b-4eff-a0aa-5e5cd85dc452
 Download Help Link: {{ Update Download Link }}
-Help Version: 0.4.1
+Help Version: 0.4.2
 Locale: en-US
 ---
 
