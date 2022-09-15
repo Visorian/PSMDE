@@ -7,7 +7,6 @@ on:
     paths:
       - src/**
       - tests/**
-      - docs/**
 
 jobs: 
   ci:
@@ -65,6 +64,13 @@ jobs:
           $readme = $readme | foreach-object { $_ -replace "(?<prefix>^.+https:\/\/img\.shields\.io\/badge\/coverage-)(.+)(?<suffix>%25-yellow\))$", "`${prefix}$coveredPercent`${suffix}" } 
           $readme | Out-File ./README.md -Force -Encoding ascii
 
+      - name: Commit updated coverage
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'docs(readme): :memo: Updated coverage'
+          commit_user_email: jdamaschke@visorian.com
+          branch: main
+
       - name: Generate public help
         shell: pwsh
         run: |
@@ -80,13 +86,6 @@ jobs:
           container_name: help
           source_folder: en-us
           delete_if_exists: true
-
-      - name: Commit updated markdown help
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "docs(help): :memo: Updated external help and coverage"
-          commit_user_email: jdamaschke@visorian.com
-          branch: main
 
       - name: Bump version and tag
         uses: mathieudutour/github-tag-action@v6.0
@@ -108,6 +107,17 @@ jobs:
           $manifest = Get-Content ./src/PSMDE.psd1
           $manifest = $manifest | foreach-object { $_ -replace "(?<prefix>^\s+ModuleVersion     = ')(.+)(?<suffix>')$", "`${prefix}$release`${suffix}" } 
           $manifest | Out-File ./src/PSMDE.psd1 -Force -Encoding ascii
+
+      - name: Commit updated markdown help
+        shell: pwsh
+        run: |
+          $commitMessage = 'docs(help): :memo: Updated markdown help'
+          Set-Location 'wiki'
+          git config --global user.name 'Jan-Henrik Damaschke'
+          git config --global user.email 'jdamaschke@visorian.com'
+          git add -A
+          git commit -m $commitMessage
+          git push
 
       - name: Commit updated version files
         uses: stefanzweifel/git-auto-commit-action@v4

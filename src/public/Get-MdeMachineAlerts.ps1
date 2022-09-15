@@ -11,6 +11,12 @@
 .LINK
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-related-alerts?view=o365-worldwide
 
+.PARAMETER id
+  Mandatory. Specifies the id of the target MDE machine.
+
+.OUTPUTS
+  PSCustomObject. The Get-MdeMachine function returns a list of or a single PSCustomObject containing the parsed MDE machine alerts.  
+
 .EXAMPLE
   Get-MdeMachineAlerts -id '123'
 
