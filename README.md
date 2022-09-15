@@ -21,7 +21,7 @@ When the service principal is created, they will be used in the session to authe
 Set-MdeAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
 ```
 
-Currently, it's not supported to authenticate via environment variables, this is planned for a later release.
+Currently, it's not supported to authenticate via environment variables, this is planned for a future release.
 
 ## Token refresh
 
