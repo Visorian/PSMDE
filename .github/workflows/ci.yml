@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
+          token: ${{ secrets.PSMDE_REPO }}
 
       - name: Install PowerShell dependencies
         shell: pwsh
@@ -69,6 +70,7 @@ jobs:
         with:
           commit_message: 'docs(readme): :memo: Updated coverage'
           commit_user_email: jdamaschke@visorian.com
+          push_options: '--force'
           branch: main
 
       - name: Generate public help
@@ -117,6 +119,7 @@ jobs:
           git config --global user.email 'jdamaschke@visorian.com'
           git add -A
           git commit -m $commitMessage
+          git pull --no-ff
           git push origin HEAD:master
 
       - name: Commit updated version files
@@ -124,4 +127,5 @@ jobs:
         with:
           commit_message: "chore(release): :bookmark: Bump version to ${{ steps.tag_version.outputs.new_tag }}"
           commit_user_email: jdamaschke@visorian.com
+          push_options: '--force'
           branch: main
