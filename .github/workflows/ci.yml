@@ -5,8 +5,9 @@ on:
     branches:
       - main
     paths:
-      - src/**
-      - tests/**
+      - 'src/**'
+      - '!src/PSMDE.psd1'
+      - 'tests/**'
   workflow_dispatch:
 
 jobs: 
