@@ -31,13 +31,37 @@ jobs:
         shell: pwsh
         continue-on-error: true
         run: |
-          Invoke-Pester -ci
+          $config = New-PesterConfiguration -Hashtable @{TestResult = @{Enabled = $true }; Run = @{Exit = $true }; CodeCoverage = @{Enabled = $true } }
+          Invoke-Pester -Configuration $config
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
           name: Pester-Tests
           path: testResults.xml
+
+      - name: Upload code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pester-Tests
+          path: coverage.xml
+
+      - name: Update coverage in README
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          [xml]$coverage = Get-Content .\coverage.xml
+          $covered = 0
+          $missed = 0
+          foreach ($counter in $coverage.report.counter) {
+            $covered += [int]$counter.covered
+            $missed += [int]$counter.missed
+          }
+          [int]$sum = $covered + $missed
+          $coveredPercent = [Math]::Floor(($covered * 100 / $sum) * 100) / 100
+          $readme = Get-Content ./README.md
+          $readme = $readme | foreach-object { $_ -replace "(?<prefix>^.+https:\/\/img\.shields\.io\/badge\/coverage-)(.+)(?<suffix>%25-yellow\))$", "`${prefix}$coveredPercent`${suffix}" } 
+          $readme | Out-File ./README.md -Force -Encoding ascii
 
       - name: Generate public help
         shell: pwsh

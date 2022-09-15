@@ -1,7 +1,8 @@
 # Microsoft Defender for Endpoint (MDE) PowerShell module
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
-![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)
+[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
+![Code Coverage](https://img.shields.io/badge/coverage-38.94%25-yellow)
 
 ## Installation
 
@@ -36,7 +37,7 @@ This will return a object with a `tokenExpire` and a `roles` field:
 Name                           Value
 ----                           -----
 tokenExpired                   False
-roles                         {Url.Read.All, Ip.Read.All, Ti.Read.All, User.Read.All…}
+roles                         {Url.Read.All, Ip.Read.All, Ti.Read.All, User.Read.All?}
 ```
 
 Each function will check, if the current token roles include at least one of the roles needed for the respective function. To get the needed roles for a specific function, you can use the `Get-MdeRoles -functionName 'Add-MdeMachineTag'` function.

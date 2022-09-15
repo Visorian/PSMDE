@@ -22,7 +22,7 @@ Describe "Get-MdeRoles" {
     InModuleScope PSMDE {
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.ReadWrite.All', 'Machine.ReadWrite') } }
       $result = Get-MdeRoles -functionName 'Add-MdeMachineTag'
-      $result.Keys | Should -Be @('validTokenPermission', 'currentRoles', 'requiredRoles')
+      $result.Keys | ForEach-Object { @('validTokenPermission', 'currentRoles', 'requiredRoles') -contains $_ | Should -Be $true }
     }
   }
 
