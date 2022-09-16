@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-  Retrieve a list of vulnerabilities in the installed software.
+  Retrieves missing KBs (security updates) by software ID.
 
 .DESCRIPTION
-  Retrieve a list of vulnerabilities in the installed software.
+  Retrieves missing KBs (security updates) by software ID.
 
 .NOTES
   Author: Jan-Henrik Damaschke
@@ -12,16 +12,16 @@
   Optional. Specifies the id of the target software.
 
 .OUTPUTS
-  PSCustomObject. The Get-MdeSoftwareVulnerability function returns a list of or a single PSCustomObject containing the parsed MDE vulnerability object.
+  PSCustomObject. The Get-MdeSoftwareMissingKbs function returns a list of or a single PSCustomObject containing the parsed MDE missing kb object.
 
 .EXAMPLE
-  Get-MdeSoftwareVulnerability -id 'microsoft-_-edge'
+  Get-MdeSoftwareMissingKbs -id 'microsoft-_-edge'
 
 .ROLE
-  @(@{permission = 'Vulnerability.Read.All'; permissionType = 'Application'}, @{permission = 'Vulnerability.Read'; permissionType = 'Delegated'})
+  @(@{permission = 'Software.Read.All'; permissionType = 'Application'}, @{permission = 'Software.Read'; permissionType = 'Delegated'})
 #>
 
-function Get-MdeSoftwareVulnerability {
+function Get-MdeSoftwareMissingKbs {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
@@ -35,7 +35,7 @@ function Get-MdeSoftwareVulnerability {
     }
   }
   Process {
-    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/Software/$id/vulnerabilities"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/Software/$id/getmissingkbs"
   }
   End {}
 }
