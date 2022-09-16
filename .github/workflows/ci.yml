@@ -67,10 +67,19 @@ jobs:
           $readme = $readme | foreach-object { $_ -replace "(?<prefix>^.+https:\/\/img\.shields\.io\/badge\/coverage-)(.+)(?<suffix>%25-yellow\))$", "`${prefix}$coveredPercent`${suffix}" } 
           $readme | Out-File ./README.md -Force -Encoding ascii
 
-      - name: Commit updated coverage
+      - name: Update public functions in README
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          $functions = ''
+          Get-ChildItem src/public | % { $functions += "- $($_.BaseName)`n" }
+          $readme = Get-Content .\README.md -Raw
+          $readme -replace "(?s)(?<prefix><\/summary>)(.+)(?<suffix><\/details>)", "`${prefix}`n`n$functions`n`${suffix}" | Out-File ./README.md -Force -Encoding ascii
+
+      - name: Commit updated coverage and functions
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'docs(readme): :memo: Updated coverage'
+          commit_message: 'docs(readme): :memo: Updated coverage and functions'
           commit_user_email: jdamaschke@visorian.com
           push_options: '--force'
           branch: main

@@ -1,3 +1,5 @@
+![PSMDE Banner](/icon/banner.png)
+
 # Microsoft Defender for Endpoint (MDE) PowerShell module
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
@@ -42,7 +44,44 @@ roles                          { Url.Read.All, Ip.Read.All, Ti.Read.All, User.Re
 
 Each function will check, if the current token roles include at least one of the roles needed for the respective function. To get the needed roles for a specific function, you can use the `Get-MdeRoles -functionName 'Add-MdeMachineTag'` function.
 
-## Usage recipes
+## Usage examples
+
+You can find help for all available functions in the [wiki](https://github.com/Visorian/PSMDE/wiki/PSMDE) or by using the PowerShell integrated help.
+These section provides an overview of the available functions and some examples for common MDE scenarios (contributions welcome).
+
+### Available functions
+
+<details>
+<summary>Function list</summary>
+
+- Add-MdeMachineTag
+- Clear-MdeAuthorizationInfo
+- Get-MdeAuthorizationInfo
+- Get-MdeMachine
+- Get-MdeMachineAlerts
+- Get-MdeMachineByFilter
+- Get-MdeMachineByIp
+- Get-MdeMachineByTag
+- Get-MdeMachineLogonUsers
+- Get-MdeMachineMissingKbs
+- Get-MdeMachineRecommendations
+- Get-MdeMachineSoftware
+- Get-MdeMachineVulnerabilities
+- Get-MdeRoles
+- Get-MdeSoftware
+- Get-MdeSoftwareByFilter
+- Get-MdeSoftwareDistribution
+- Get-MdeSoftwareMachineReferences
+- Get-MdeSoftwareMissingKbs
+- Get-MdeSoftwareVulnerability
+- Get-MdeVulnerability
+- Get-MdeVulnerabilityByMachine
+- Get-MdeVulnerabilityMachinesByVulnerability
+- Remove-MdeMachineTag
+- Set-MdeAuthorizationInfo
+- Update-MdeMachine
+
+</details>
 
 ### Get all MDE servers and add the `computername` attribute
 
@@ -117,3 +156,4 @@ If you are closing issues with a PR, please reference the issues in the PR descr
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
