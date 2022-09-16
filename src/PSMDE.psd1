@@ -131,7 +131,7 @@
       ProjectUri = 'https://github.com/Visorian/PSMDE'
 
       # A URL to an icon representing this module.
-      # IconUri = ''
+      IconUri = 'https://raw.githubusercontent.com/Visorian/PSMDE/main/icon/psmde.png'
 
       # ReleaseNotes of this module
       # ReleaseNotes = ''
