@@ -12,7 +12,7 @@
   RootModule        = 'PSMDE.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.7.1'
+  ModuleVersion     = '0.5.7'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -84,13 +84,18 @@
     'Get-MdeMachineSoftware'
     'Get-MdeMachineVulnerabilities'
     'Get-MdeRoles'
+    'Get-MdeSoftware'
+    'Get-MdeSoftwareByFilter'
+    'Get-MdeSoftwareDistribution'
+    'Get-MdeSoftwareMachineReferences'
+    'Get-MdeSoftwareMissingKbs'
+    'Get-MdeSoftwareVulnerability'
     'Get-MdeVulnerability'
     'Get-MdeVulnerabilityByMachine'
     'Get-MdeVulnerabilityMachinesByVulnerability'
     'Remove-MdeMachineTag'
     'Set-MdeAuthorizationInfo'
     'Update-MdeMachine'
-    'Get-MdeSoftware'
   )
 
   # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -117,7 +122,7 @@
     PSData = @{
 
       # Tags applied to this module. These help with module discovery in online galleries.
-      Tags = @('MDE', 'Endpoint', 'Security', 'Defender', 'ATP', 'Defender-ATP')
+      Tags       = @('MDE', 'Endpoint', 'Security', 'Defender', 'ATP', 'Defender-ATP')
 
       # A URL to the license for this module.
       LicenseUri = ''
