@@ -102,10 +102,18 @@ If you finished your change, you can create a pull request (PR) to get them merg
 
 :warning: **Before creatign a PR, please make sure that no tests are failing (`Invoke-Pester`) and PSScriptAnalyzer (`Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse -Severity Error`) doesn't return any errors.**
 
-If you are closing issues with a PR, please reference the issue in the PR descripotion (`fix/fixes #123` where 123 is the issue id).
+Make sure, you have updated the wiki submodule in the `wiki` folder:
+
+```PowerShell
+Set-Location wiki
+git pull
+Set-Location ..
+```
+
+If you are closing issues with a PR, please reference the issues in the PR description (`fix/fixes #123` where 123 is the issue id).
 
 ## License
 
-Made with ??
+Made with :heart:
 
 Published under [MIT License](./LICENCE).
