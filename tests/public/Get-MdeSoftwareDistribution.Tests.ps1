@@ -3,7 +3,7 @@ BeforeAll {
   Import-Module (Split-Path $PSCommandPath).replace('tests', 'src').Replace('public', 'PSMDE.psd1')
 }
 
-Describe "Get-MdeSoftware" {
+Describe "Get-MdeSoftwareDistribution" {
 
   It 'Should have the PSMDE module loaded' {
     $module = Get-Module PSMDE
@@ -17,20 +17,11 @@ Describe "Get-MdeSoftware" {
     }
   }
 
-  It 'Should call Invoke-AzureRequest when any parameter is provided' {
+  It 'Should call Invoke-AzureRequest when id parameter is provided' {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { }
       Mock Test-MdePermissions { return $true }
-      Get-MdeSoftware -id '123'
-      Should -Invoke Invoke-AzureRequest
-    }
-  }
-
-  It 'Should call Invoke-AzureRequest when no parameter is provided' {
-    InModuleScope PSMDE {
-      Mock Invoke-AzureRequest { }
-      Mock Test-MdePermissions { return $true }
-      Get-MdeSoftware
+      Get-MdeSoftwareDistribution -id '123'
       Should -Invoke Invoke-AzureRequest
     }
   }
@@ -39,8 +30,8 @@ Describe "Get-MdeSoftware" {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { return $uri }
       Mock Test-MdePermissions { return $true }
-      Get-MdeSoftware -id '123' -name 'softwareName' | Should -Be "https://api.securitycenter.microsoft.com/api/Software?`$filter=id eq '123' and name eq 'softwareName'"
-      Get-MdeSoftware -id '123' -vendor 'vendorName' | Should -Be "https://api.securitycenter.microsoft.com/api/Software?`$filter=id eq '123' and vendor eq 'vendorName'"
+      $id = 'microsoft-_-outlook'
+      Get-MdeSoftwareDistribution -id $id | Should -Be "https://api.securitycenter.microsoft.com/api/Software/$id/distributions"
     }
   }
 }

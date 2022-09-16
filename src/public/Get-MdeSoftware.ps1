@@ -9,16 +9,16 @@
   Author: Jan-Henrik Damaschke
 
 .PARAMETER id
-  Optional. Specifies the id of the target MDE machine.
+  Optional. Specifies the id of the target MDE software.
 
 .PARAMETER name
-  Optional. Specifies the id of the target MDE machine.
+  Optional. Specifies the id of the target MDE software.
 
 .PARAMETER vendor
-  Optional. Specifies the id of the target MDE machine.
+  Optional. Specifies the id of the target MDE software.
 
 .OUTPUTS
-  PSCustomObject. The Get-MdeMachine function returns a list of or a single PSCustomObject containing the parsed MDE machine object.
+  PSCustomObject. The Get-MdeSoftware function returns a list of or a single PSCustomObject containing the parsed MDE software object.
 
 .EXAMPLE
   $software = Get-MdeSoftware
@@ -57,9 +57,9 @@ function Get-MdeSoftware {
       return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/Software"
     }
     else {
-      $uri = 'https://api.securitycenter.microsoft.com/api/machines?$filter={0}{1}{2}' -f ($id ? "id eq '$id' and " : ''), ($name ? "name eq '$name' and " : ''), ($vendor ? "vendor eq '$vendor'" : '')
+      $uri = 'https://api.securitycenter.microsoft.com/api/Software?$filter={0}{1}{2}' -f ($id ? "id eq '$id' and " : ''), ($name ? "name eq '$name' and " : ''), ($vendor ? "vendor eq '$vendor'" : '')
       $null = $uri.EndsWith(' and ') && ($uri = $uri.TrimEnd(' and '))
-      return Invoke-RetryRequest -Method Get -Uri $uri
+      return Invoke-AzureRequest -Uri $uri
     }
   }
   End {}

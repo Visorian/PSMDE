@@ -35,19 +35,19 @@ jobs:
         shell: pwsh
         continue-on-error: true
         run: |
-          $config = New-PesterConfiguration -Hashtable @{TestResult = @{Enabled = $true }; Run = @{Exit = $true }; CodeCoverage = @{Enabled = $true } }
+          $config = New-PesterConfiguration -Hashtable @{ TestResult = @{ Enabled = $true }; Run = @{ Exit = $true }; CodeCoverage = @{ Enabled = $true; Path = @('src/public', 'src/private') } }
           Invoke-Pester -Configuration $config
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         with:
-          name: Pester-Tests
+          name: Test-and-Coverage
           path: testResults.xml
 
       - name: Upload code coverage results
         uses: actions/upload-artifact@v3
         with:
-          name: Pester-Tests
+          name: Test-and-Coverage
           path: coverage.xml
 
       - name: Update coverage in README

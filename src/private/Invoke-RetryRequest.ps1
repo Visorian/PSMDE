@@ -26,7 +26,7 @@ function Invoke-RetryRequest {
       }
     }
     catch {
-      if ($error[0].Exception.Response.StatusCode.value__ -ne 429) { $retry = $false; Write-Error $error[0].Exception; break }
+      if ($error[0].Exception.Response.StatusCode.value__ -ne 429) { $retry = $false; $_; break }
       $sleepDuration = $sleepDuration -eq 0 ? 4 : $sleepDuration * 2
       $retry = $true
       Write-Verbose "Retrying in $sleepDuration seconds"
