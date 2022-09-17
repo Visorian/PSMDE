@@ -90,6 +90,8 @@
     'Get-MdeSoftwareMachineReferences'
     'Get-MdeSoftwareMissingKbs'
     'Get-MdeSoftwareVulnerability'
+    'Get-MdeUserAlerts'
+    'Get-MdeUserMachines'
     'Get-MdeVulnerability'
     'Get-MdeVulnerabilityByMachine'
     'Get-MdeVulnerabilityMachinesByVulnerability'
