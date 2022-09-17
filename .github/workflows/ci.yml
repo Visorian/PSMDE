@@ -90,6 +90,7 @@ jobs:
           Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
           Import-Module .\src\PSMDE.psd1
           Update-MarkdownHelpModule -Path 'wiki' -RefreshModulePage -UpdateInputOutput -Force
+          (Get-Content .\wiki\PSMDE.md) -replace '(.md\))', ')' | Out-File .\wiki\PSMDE.md -Force -Encoding ascii
           New-ExternalHelp -Path 'wiki' -OutputPath 'en-us' -Force
 
       - name: Upload public help
