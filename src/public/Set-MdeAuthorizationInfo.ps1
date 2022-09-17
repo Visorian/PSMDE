@@ -3,10 +3,24 @@
   Set the authorization information that is used to get a valid MDE token.
 
 .DESCRIPTION
-  Set the authorization information that is used to get a valid MDE token.
-
+  Set the authorization information that is used to get a valid MDE token. You can use a service principal (app registration) or directly provide a token.
 .NOTES
   Author: Jan-Henrik Damaschke
+
+.PARAMETER tenantId
+  Mandatory. Service principal tenant id.
+
+.PARAMETER appId
+  Mandatory. Service principal app id.
+
+.PARAMETER appSecret
+  Mandatory. Service principal secret.
+
+.PARAMETER noTokenRefresh
+  Optional. If this switch is provided, no token refresh is performed.
+
+.PARAMETER token
+  Mandatory. You can provide the token directly with this parameter. If used, none of the other parameters can be used.
 
 .LINK
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exposed-apis-create-app-webapp?view=o365-worldwide
@@ -18,24 +32,35 @@
 function Set-MdeAuthorizationInfo {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'ServicePrincipal', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $tenantId,
-    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'ServicePrincipal', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $appId,
-    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'ServicePrincipal', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $appSecret,
+    [Parameter(ParameterSetName = 'ServicePrincipal')]
     [switch]
-    $noTokenRefresh
+    $noTokenRefresh,
+    [Parameter(ParameterSetName = 'Token', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [string]
+    $token
   )
-  $script:tenantId = New-AesSessionSecret -secret $tenantId
-  $script:appId = New-AesSessionSecret -secret $appId
-  $script:appSecret = New-AesSessionSecret -secret $appSecret
-
-  Write-Verbose "Refreshing access token"
-  if (-not $noTokenRefresh) { $null = Get-MdeAuthorizationHeader }
+  Process {
+    if ($token) {
+      $script:tokenCache = New-AesSessionSecret -secret $token
+      $noTokenRefresh = $true
+    }
+    else {
+      $script:tenantId = New-AesSessionSecret -secret $tenantId
+      $script:appId = New-AesSessionSecret -secret $appId
+      $script:appSecret = New-AesSessionSecret -secret $appSecret
+    }
+    Write-Verbose "Refreshing access token"
+    if (-not $noTokenRefresh) { $null = Get-MdeAuthorizationHeader }
+  }
 }
 # SIG # Begin signature block
 # MIIVigYJKoZIhvcNAQcCoIIVezCCFXcCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB

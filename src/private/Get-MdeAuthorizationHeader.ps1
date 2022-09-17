@@ -22,12 +22,11 @@ function Get-MdeAuthorizationHeader {
         $script:tokenCache = New-AesSessionSecret -secret $tc
       }
       catch {
-        Write-Error "Failed to acquire token"
+        Throw "Failed to acquire token"
       }
     }
     else {
-      Write-Error 'Authorization info missing, have you executed Set-MdeAuthorizationInfo?'
-      break
+      Throw 'Authorization info missing. If you provided the token directly, you have to update it manually using Set-MdeAuthorizationInfo.'
     }
   }
   return @{ Authorization = "Bearer $tc" }
