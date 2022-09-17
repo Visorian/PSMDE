@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-38.95%25-yellow)
+![Code Coverage](https://img.shields.io/badge/coverage-39.39%25-yellow)
 
 ## Installation
 
@@ -74,6 +74,8 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeSoftwareMachineReferences
 - Get-MdeSoftwareMissingKbs
 - Get-MdeSoftwareVulnerability
+- Get-MdeUserAlerts
+- Get-MdeUserMachines
 - Get-MdeVulnerability
 - Get-MdeVulnerabilityByMachine
 - Get-MdeVulnerabilityMachinesByVulnerability
@@ -156,4 +158,5 @@ If you are closing issues with a PR, please reference the issues in the PR descr
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
 
