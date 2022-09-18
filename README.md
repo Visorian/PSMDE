@@ -14,14 +14,59 @@ Install-Module PSMDE
 
 ## First steps
 
+### Service principal creation
+
 This module is optimized for unattended use, so you need to provide a service principal to authenticate against the MDE API.
 The detailed process to create a service principal with the correct roles is explained [here](https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exposed-apis-create-app-webapp?view=o365-worldwide).
 
-When the service principal is created, they will be used in the session to authenticate and refresh the token if necessary. To initialize or update the session authentication information, the `Set-MdeAuthorizationInfo` function is used.
+You can use the helper function `New-MdeServicePrincipal` to create a app registration with the needed permissions:
+
+```PowerShell
+New-MdeServicePrincipal
+
+Name                           Value
+----                           -----
+servicePrincipalSecret         
+servicePrincipalId             12345678-1234-1234-1234-123456789012
+servicePrincipalName           PSMDE
+servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
+servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
+servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA…
+servicePrincipalSecretExpirat… 
+```
+
+To also create a secret and add it to the current session credentials automatically, specify the `-initialize` parameter.
+
+```PowerShell
+New-MdeServicePrincipal -initialize
+
+Name                           Value
+----                           -----
+servicePrincipalSecret         abc123
+servicePrincipalId             12345678-1234-1234-1234-123456789012
+servicePrincipalName           PSMDE
+servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
+servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
+servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA…
+servicePrincipalSecretExpirat… 10/18/2022 14:20:02
+```
+
+:warning: **The created secret is only valid for 30 days. If you need a longer lasting secret, please create a new one in the Azure portal or using `New-AzADAppCredential`.**
+
+By default, the `New-MdeServicePrincipal` adds all available `Read.All` or `Read` application permission. If you need to use delegated permissions, use the `-delegated` parameter.
+To also add permissions for write operations, add the `-permissions 'readwrite'` parameter.
+
+After the creation, `New-MdeServicePrincipal` will automatically open a browser with the service principals API page to grant permissions. If you don't want this, add the `-dontOpenGrantUrl` parameter, but **don't forget to grant you service principal permissions before using it**.
+
+### Authentication
+
+After you created the service principal or used the `New-MdeServicePrincipal` function, you need to add the credentials to the current session to authenticate and refresh the token if necessary (unless you used `New-MdeServicePrincipal -initialize`). To initialize or update the session authentication information, use the `Set-MdeAuthorizationInfo` function.
 
 ```PowerShell
 Set-MdeAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
 ```
+
+If you added new scopes or want to manually refresh the token before expiration, use the `Clear-MdeAuthorizationInfo` function and add the credentials again with `Set-MdeAuthorizationInfo`.
 
 Currently, it's not supported to authenticate via environment variables, this is planned for a future release.
 
@@ -159,7 +204,3 @@ If you are closing issues with a PR, please reference the issues in the PR descr
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
-
-
-
-
