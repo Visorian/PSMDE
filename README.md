@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-28.54%25-yellow)
+![Code Coverage](https://img.shields.io/badge/coverage-60.22%25-yellow)
 
 ## Installation
 
@@ -21,18 +21,20 @@ The detailed process to create a service principal with the correct roles is exp
 
 You can use the helper function `New-MdeServicePrincipal` to create a app registration with the needed permissions:
 
+:warning: **`New-MdeServicePrincipal` uses your current Azure session. If there is no current Azure context (verify with `Get-AzContext`), execution will fail. This way you can use it e.g. with the [Azure Login Github Action](https://github.com/marketplace/actions/azure-login)** or your current logged in Azure session on you computer.
+
 ```PowerShell
 New-MdeServicePrincipal
 
-Name                           Value
-----                           -----
-servicePrincipalSecret         
-servicePrincipalId             12345678-1234-1234-1234-123456789012
-servicePrincipalName           PSMDE
-servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
-servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
-servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA?
-servicePrincipalSecretExpirat? 
+Name                             Value
+----                             -----
+servicePrincipalSecret           
+servicePrincipalId               12345678-1234-1234-1234-123456789012
+servicePrincipalName             PSMDE
+servicePrincipalTenantId         12345678-1234-1234-1234-123456789012
+servicePrincipalApplicationId    12345678-1234-1234-1234-123456789012
+servicePrincipalPermissionsUrl   https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA
+servicePrincipalSecretExpiration 
 ```
 
 To also create a secret and add it to the current session credentials automatically, specify the `-initialize` parameter.
@@ -40,15 +42,15 @@ To also create a secret and add it to the current session credentials automatica
 ```PowerShell
 New-MdeServicePrincipal -initialize
 
-Name                           Value
-----                           -----
-servicePrincipalSecret         abc123
-servicePrincipalId             12345678-1234-1234-1234-123456789012
-servicePrincipalName           PSMDE
-servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
-servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
-servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA?
-servicePrincipalSecretExpirat? 10/18/2022 14:20:02
+Name                             Value
+----                             -----
+servicePrincipalSecret           abc123
+servicePrincipalId               12345678-1234-1234-1234-123456789012
+servicePrincipalName             PSMDE
+servicePrincipalTenantId         12345678-1234-1234-1234-123456789012
+servicePrincipalApplicationId    12345678-1234-1234-1234-123456789012
+servicePrincipalPermissionsUrl   https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA
+servicePrincipalSecretExpiration 10/18/2022 14:20:02
 ```
 
 :warning: **The created secret is only valid for 30 days. If you need a longer lasting secret, please create a new one in the Azure portal or using `New-AzADAppCredential`.**
@@ -204,4 +206,3 @@ If you are closing issues with a PR, please reference the issues in the PR descr
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
-

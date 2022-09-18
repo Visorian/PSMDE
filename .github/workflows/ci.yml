@@ -55,12 +55,8 @@ jobs:
         continue-on-error: true
         run: |
           [xml]$coverage = Get-Content .\coverage.xml
-          $covered = 0
-          $missed = 0
-          foreach ($counter in $coverage.report.counter) {
-            $covered += [int]$counter.covered
-            $missed += [int]$counter.missed
-          }
+          [int]$covered = $coverage.report.counter | Where-Object type -eq 'INSTRUCTION' | select -ExpandProperty 'covered'
+          [int]$missed = $coverage.report.counter | Where-Object type -eq 'INSTRUCTION' | select -ExpandProperty 'missed'
           [int]$sum = $covered + $missed
           $coveredPercent = [Math]::Floor(($covered * 100 / $sum) * 100) / 100
           $readme = Get-Content ./README.md
@@ -72,7 +68,7 @@ jobs:
         continue-on-error: true
         run: |
           $functions = ''
-          Get-ChildItem src/public | % { $functions += "- $($_.BaseName)`n" }
+          (Import-PowerShellDataFile -Path ./src/PSMDE.psd1).FunctionsToExport | % { $functions += "- $($_)`n" }
           $readme = Get-Content .\README.md -Raw
           $readme -replace "(?s)(?<prefix><\/summary>)(.+)(?<suffix><\/details>)", "`${prefix}`n`n$functions`n`${suffix}" | Out-File ./README.md -Force -Encoding ascii
 

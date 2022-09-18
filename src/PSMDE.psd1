@@ -84,7 +84,6 @@
     'Get-MdeMachineSoftware'
     'Get-MdeMachineVulnerabilities'
     'Get-MdeRoles'
-    'New-MdeServicePrincipal'
     'Get-MdeSoftware'
     'Get-MdeSoftwareByFilter'
     'Get-MdeSoftwareDistribution'
@@ -96,6 +95,7 @@
     'Get-MdeVulnerability'
     'Get-MdeVulnerabilityByMachine'
     'Get-MdeVulnerabilityMachinesByVulnerability'
+    'New-MdeServicePrincipal'
     'Remove-MdeMachineTag'
     'Set-MdeAuthorizationInfo'
     'Update-MdeMachine'
@@ -128,7 +128,7 @@
       Tags       = @('MDE', 'Endpoint', 'Security', 'Defender', 'ATP', 'Defender-ATP')
 
       # A URL to the license for this module.
-      LicenseUri = ''
+      LicenseUri = 'https://github.com/Visorian/PSMDE/blob/main/LICENSE'
 
       # A URL to the main website for this project.
       ProjectUri = 'https://github.com/Visorian/PSMDE'
