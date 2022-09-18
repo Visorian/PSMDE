@@ -24,7 +24,7 @@ jobs:
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-Module platyps, PSScriptAnalyzer -force
+          Install-Module platyps, PSScriptAnalyzer, Az -force
 
       - name: Run PSScriptAnalyzer
         shell: pwsh
@@ -33,7 +33,6 @@ jobs:
 
       - name: Run Tests
         shell: pwsh
-        continue-on-error: true
         run: |
           $config = New-PesterConfiguration -Hashtable @{ TestResult = @{ Enabled = $true }; Run = @{ Exit = $true }; CodeCoverage = @{ Enabled = $true; Path = @('src/public', 'src/private') } }
           Invoke-Pester -Configuration $config

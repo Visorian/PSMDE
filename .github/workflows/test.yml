@@ -27,7 +27,6 @@ jobs:
 
       - name: Run Tests
         shell: pwsh
-        continue-on-error: true
         run: |
           $config = New-PesterConfiguration -Hashtable @{TestResult = @{Enabled = $true }; Run = @{Exit = $true }; CodeCoverage = @{Enabled = $true } }
           Invoke-Pester -Configuration $config
