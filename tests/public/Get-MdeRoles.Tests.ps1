@@ -12,6 +12,7 @@ Describe "Get-MdeRoles" {
 
   It 'Should call Get-MdeAuthorizationInfo' {
     InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.Read.All', 'User.Read.All') } }
       Test-MdePermissions -functionName 'Get-MdeMachine'
       Should -Invoke Get-MdeAuthorizationInfo
@@ -20,6 +21,7 @@ Describe "Get-MdeRoles" {
 
   It 'Should return the correct roles of a function' {
     InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.ReadWrite.All', 'Machine.ReadWrite') } }
       $result = Get-MdeRoles -functionName 'Add-MdeMachineTag'
       $result.Keys | ForEach-Object { @('validTokenPermission', 'currentRoles', 'requiredRoles') -contains $_ | Should -Be $true }

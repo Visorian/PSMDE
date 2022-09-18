@@ -84,6 +84,7 @@
     'Get-MdeMachineSoftware'
     'Get-MdeMachineVulnerabilities'
     'Get-MdeRoles'
+    'New-MdeServicePrincipal'
     'Get-MdeSoftware'
     'Get-MdeSoftwareByFilter'
     'Get-MdeSoftwareDistribution'

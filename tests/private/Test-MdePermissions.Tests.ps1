@@ -18,20 +18,16 @@ Describe 'Test-MdePermissions' {
 
   It 'Should call Get-MdeAuthorizationInfo' {
     InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.Read.All', 'User.Read.All') } }
       Test-MdePermissions -functionName 'Get-MdeMachine'
       Should -Invoke Get-MdeAuthorizationInfo
     }
   }
 
-  It 'Should resolve roles correctly' {
-    $cmdletRoles = @(@{permission = 'Machine.Read.All'; permissionType = 'Application' }, @{permission = 'Machine.ReadWrite.All'; permissionType = 'Application' }, @{permission = 'Machine.Read'; permissionType = 'Delegated' }, @{permission = 'Machine.ReadWrite'; permissionType = 'Delegated' })
-    $requiredRoles = (Get-Help 'Get-MdeMachine' -Full).role | Invoke-Expression
-    $requiredRoles.Values | Should -Be $cmdletRoles.Values
-  }
-
   It 'Should return true, if roles are in token' {
     InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.Read.All', 'User.Read.All') } }
       Test-MdePermissions -functionName 'Get-MdeMachine' | Should -Be $true
     }
@@ -39,6 +35,7 @@ Describe 'Test-MdePermissions' {
 
   It 'Should return false, if roles not in token' {
     InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('User.Read.All') } }
       Test-MdePermissions -functionName 'Get-MdeMachine' | Should -Be $false
     }
@@ -51,6 +48,7 @@ Describe 'Test-MdePermissions' {
         requiredRoles        = @('Machine.Read.All', 'Machine.ReadWrite.All', 'Machine.Read', 'Machine.ReadWrite')
         currentRoles         = @('User.Read.All')
       }
+      Mock Get-MdeAuthorizationHeader { }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('User.Read.All') } }
       $result = Test-MdePermissions -functionName 'Get-MdeMachine' -detailed
       $result | Should -BeOfType Hashtable
