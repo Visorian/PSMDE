@@ -31,8 +31,8 @@ servicePrincipalId             12345678-1234-1234-1234-123456789012
 servicePrincipalName           PSMDE
 servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
 servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
-servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA…
-servicePrincipalSecretExpirat… 
+servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA?
+servicePrincipalSecretExpirat? 
 ```
 
 To also create a secret and add it to the current session credentials automatically, specify the `-initialize` parameter.
@@ -47,8 +47,8 @@ servicePrincipalId             12345678-1234-1234-1234-123456789012
 servicePrincipalName           PSMDE
 servicePrincipalTenantId       12345678-1234-1234-1234-123456789012
 servicePrincipalApplicationId  12345678-1234-1234-1234-123456789012
-servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA…
-servicePrincipalSecretExpirat… 10/18/2022 14:20:02
+servicePrincipalPermissionsUrl https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnA?
+servicePrincipalSecretExpirat? 10/18/2022 14:20:02
 ```
 
 :warning: **The created secret is only valid for 30 days. If you need a longer lasting secret, please create a new one in the Azure portal or using `New-AzADAppCredential`.**
@@ -204,3 +204,4 @@ If you are closing issues with a PR, please reference the issues in the PR descr
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
