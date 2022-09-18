@@ -3,7 +3,7 @@ function Get-MdeAuthorizationHeader {
   $expired = $tc ? [DateTime]::Now -gt [TimeZoneInfo]::ConvertTimeFromUtc(([DateTime]::UnixEpoch).AddSeconds((Get-ParsedToken -token $tc).exp), [TimeZoneInfo]::FindSystemTimeZoneById('Central European Standard Time')) : $true
   Write-Verbose "Token expired: $expired"
   if ($expired) {
-    if ($appId -and $appSecret -and $tenantId) {
+    if ($script:appId -and $script:appSecret -and $script:tenantId) {
       try {
         $ai = Get-AesSessionSecret -cipherText $script:appId
         $as = Get-AesSessionSecret -cipherText $script:appSecret

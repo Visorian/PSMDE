@@ -24,6 +24,7 @@ Describe "Add-MdeMachineTag" {
 
   It 'Should call Invoke-RetryRequest when id parameter is provided' {
     InModuleScope PSMDE {
+      Mock Test-MdePermissions { return $true }
       Mock Get-MdeAuthorizationInfo { return @{roles = @('Machine.ReadWrite.All', 'Machine.ReadWrite') } }
       Mock Invoke-RetryRequest { }
       Add-MdeMachineTag -id '123' -tag 'test'

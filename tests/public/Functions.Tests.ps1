@@ -1,6 +1,9 @@
 $functions = Get-ChildItem (Split-Path $PSCommandPath).Replace('tests', 'src') -Filter *.ps1
 foreach ($function in $functions) {
   Describe "Verify $($function.BaseName)" -ForEach @{ Function = $function } {
+    BeforeEach {
+      New-Variable -Name 'exclusions' -Value @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo', 'Clear-MdeAuthorizationInfo', 'Get-MdeRoles', 'New-MdeServicePrincipal') -Force
+    }
 
     It "Should have a test file" {
       Test-Path ($function.FullName.Replace('src', 'tests').Replace('.ps1', '.Tests.ps1')) | Should -Be $true
@@ -20,7 +23,6 @@ foreach ($function in $functions) {
     }
 
     It "Should have a ROLE help section with an array of hashtables" {
-      $exclusions = @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo', 'Clear-MdeAuthorizationInfo', 'Get-MdeRoles')
       if ($exclusions -notcontains $function.BaseName) {
         $function.FullName | Should -FileContentMatch '.ROLE'
         . $function.FullName
@@ -31,7 +33,6 @@ foreach ($function in $functions) {
     }
 
     It "Should use Test-MdePermissions to validate current permissions" {
-      $exclusions = @('Set-MdeAuthorizationInfo', 'Get-MdeAuthorizationInfo', 'Clear-MdeAuthorizationInfo', 'Get-MdeRoles')
       if ($exclusions -notcontains $function.BaseName) {
         $function.FullName | Should -FileContentMatch 'Test-MdePermissions'
       }

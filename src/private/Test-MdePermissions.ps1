@@ -8,6 +8,7 @@ function Test-MdePermissions {
     [switch]
     $detailed = $false
   )
+  if (-not $script:tokenCache) { $null = Get-MdeAuthorizationHeader }
   $roles = (Get-MdeAuthorizationInfo).roles
   $requiredRoles = (Get-Help $functionName -Full).role | Invoke-Expression
   $containsRole = $false
