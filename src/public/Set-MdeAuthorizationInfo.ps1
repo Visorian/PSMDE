@@ -58,7 +58,7 @@ function Set-MdeAuthorizationInfo {
       $script:appId = New-AesSessionSecret -secret $appId
       $script:appSecret = New-AesSessionSecret -secret $appSecret
     }
-    if (-not $noTokenRefresh) { Write-Verbose "Refreshing access token"; $null = Get-MdeAuthorizationHeader }
+    if (-not $noTokenRefresh) { $script:tokenCache = $null; Write-Verbose "Refreshing access token"; $null = Get-MdeAuthorizationHeader }
   }
 }
 # SIG # Begin signature block

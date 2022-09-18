@@ -4,6 +4,7 @@ New-Variable -Name tenantId -Value $null -Scope Script -Force
 New-Variable -Name appId -Value $null -Scope Script -Force
 New-Variable -Name appSecret -Value $null -Scope Script -Force
 New-Variable -Name tokenCache -Value $null -Scope Script -Force
+New-Variable -Name initialize -Value $false -Scope Script -Force
 
 # Import private and public scripts and expose the public ones
 

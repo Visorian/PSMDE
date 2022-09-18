@@ -160,9 +160,11 @@ function New-MdeServicePrincipal {
       if ($initialize) {
         $secret = $sp | New-AzADAppCredential -EndDate (Get-Date).AddDays(30)
         Set-MdeAuthorizationInfo -tenantId $context.Tenant.Id -appId $sp.AppId -appSecret $secret.SecretText -noTokenRefresh
+        $script:initialize = $true
       }
       $grantUrl = "https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnAPI/appId/$($sp.AppId)"
       if (-not $dontOpenGrantUrl) { Start-Process $grantUrl }
+      Write-Output "Please grant consent for the provided API permissions. The first execution of a function can take a few seconds, as the grants are not immediatly available."
       return @{
         servicePrincipalName             = $sp.DisplayName
         servicePrincipalId               = $sp.Id

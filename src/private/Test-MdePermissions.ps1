@@ -8,7 +8,12 @@ function Test-MdePermissions {
     [switch]
     $detailed = $false
   )
-  if (-not $script:tokenCache) { $null = Get-MdeAuthorizationHeader }
+  if ($script:initialize) { 
+    Write-Output "Waiting 45 seconds for Azure AD grants to be propagated..."
+    Start-Sleep -Seconds 45
+    $null = Get-MdeAuthorizationHeader
+    $script:initialize = $false
+  }
   $roles = (Get-MdeAuthorizationInfo).roles
   $requiredRoles = (Get-Help $functionName -Full).role | Invoke-Expression
   $containsRole = $false
