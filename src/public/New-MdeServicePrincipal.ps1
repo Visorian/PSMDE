@@ -1,6 +1,5 @@
 #Requires -PSEdition Core
 #Requires -Version 7.0
-#Requires -Modules Az
 
 <#
 .SYNOPSIS
@@ -134,9 +133,10 @@ function New-MdeServicePrincipal {
       @{name = 'User.Read.All'; id = 'ffd6563e-842b-4cfc-b349-06006e0473a3' }
       @{name = 'Vulnerability.Read'; id = '63a677ce-818c-4409-9d12-5c6d2e2a6bfe' }
     )
+    try { Get-Command Get-AzContext -ErrorAction Stop } catch { Throw 'Az module not found, please install it and connect to Azure.' }
+    $context = (Get-AzContext)
   }
   Process {
-    $context = (Get-AzContext)
     if ($context) {
       $sp = New-AzADServicePrincipal -DisplayName $name
       # Wait for Azure AD
@@ -177,7 +177,7 @@ function New-MdeServicePrincipal {
       }
     }
     else {
-      Throw 'No active Az session found, please execute Connect-AzAccount first.'
+      Throw 'No active Az session found, please run Connect-AzAccount first.'
     }
   }
   End {}
