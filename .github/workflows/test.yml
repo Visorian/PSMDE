@@ -28,6 +28,7 @@ jobs:
       - name: Run Tests
         shell: pwsh
         run: |
+          Install-Module Az.Accounts, Az.Resources -Force
           $config = New-PesterConfiguration -Hashtable @{TestResult = @{Enabled = $true }; Run = @{Exit = $true }; CodeCoverage = @{Enabled = $true } }
           Invoke-Pester -Configuration $config
 
