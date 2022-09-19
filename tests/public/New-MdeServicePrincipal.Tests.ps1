@@ -14,7 +14,7 @@ Describe "New-MdeServicePrincipal" {
   It 'Should throw when no Azure context is available' {
     InModuleScope PSMDE {
       Mock Get-AzContext { return $null }
-      { New-MdeServicePrincipal } | Should -Throw 'No active Az session found, please execute Connect-AzAccount first.'
+      { New-MdeServicePrincipal } | Should -Throw 'No active Az session found, please run Connect-AzAccount first.'
     }
   }
 
