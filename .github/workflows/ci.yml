@@ -24,16 +24,26 @@ jobs:
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
-          Install-Module platyps, PSScriptAnalyzer, Az -force
+          Install-Module PSScriptAnalyzer, platyPS -force
 
       - name: Run PSScriptAnalyzer
         shell: pwsh
         run: |
           Invoke-ScriptAnalyzer -Path .\ -Settings PSGallery -Recurse -ReportSummary -Severity Error
 
+      - name: Generate public help
+        shell: pwsh
+        run: |
+          Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
+          Import-Module .\src\PSMDE.psd1
+          Update-MarkdownHelpModule -Path 'wiki' -RefreshModulePage -UpdateInputOutput -Force
+          (Get-Content .\wiki\PSMDE.md) -replace '(.md\))', ')' | Out-File .\wiki\PSMDE.md -Force -Encoding ascii
+          New-ExternalHelp -Path 'wiki' -OutputPath 'en-us' -Force
+
       - name: Run Tests
         shell: pwsh
         run: |
+          Install-Module Az.Accounts, Az.Resources -Force
           $config = New-PesterConfiguration -Hashtable @{ TestResult = @{ Enabled = $true }; Run = @{ Exit = $true }; CodeCoverage = @{ Enabled = $true; Path = @('src/public', 'src/private') } }
           Invoke-Pester -Configuration $config
 
@@ -78,16 +88,6 @@ jobs:
           commit_user_email: jdamaschke@visorian.com
           push_options: '--force'
           branch: main
-
-      - name: Generate public help
-        shell: pwsh
-        run: |
-          Remove-Module PSMDE -Force -ErrorAction SilentlyContinue
-          Import-Module .\src\PSMDE.psd1
-          Import-Module platyps -Force
-          Update-MarkdownHelpModule -Path 'wiki' -RefreshModulePage -UpdateInputOutput -Force
-          (Get-Content .\wiki\PSMDE.md) -replace '(.md\))', ')' | Out-File .\wiki\PSMDE.md -Force -Encoding ascii
-          New-ExternalHelp -Path 'wiki' -OutputPath 'en-us' -Force
 
       - name: Upload public help
         uses: LanceMcCarthy/Action-AzureBlobUpload@v2
