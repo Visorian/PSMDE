@@ -19,14 +19,14 @@ function Invoke-RetryRequest {
     try {
       $retry = $false
       if (@('put', 'patch', 'post') -contains $method.ToLower()) {
-        return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri -Body $body
+        return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri -Body $body -ErrorAction Stop
       }
       else {
-        return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri
+        return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri -ErrorAction Stop
       }
     }
     catch {
-      if ($error[0].Exception.Response.StatusCode.value__ -ne 429) { $retry = $false; $_; break }
+      if ($_.Exception.Response.StatusCode.value__ -ne 429) { $retry = $false; $_; break }
       $sleepDuration = $sleepDuration -eq 0 ? 4 : $sleepDuration * 2
       $retry = $true
       Write-Verbose "Retrying in $sleepDuration seconds"
