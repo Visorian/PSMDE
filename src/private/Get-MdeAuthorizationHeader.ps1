@@ -46,7 +46,14 @@ function Get-MdeAuthorizationHeader {
 		}
 
 		# Invoke the Rest Request
-		$authResponse = Invoke-RestMethod -Method Post -Uri $oAuthUri -Body $authBody -ErrorAction Stop
+		$params = @{
+			Method = 'POST'
+			URI = $oAuthUri
+			Body = $authBody
+			ErrorAction = 'Stop'
+		}
+
+		$authResponse = Invoke-RestMethod @params
 
 		$tc = $authResponse.access_token
 		$script:tokenCache = New-AesSessionSecret -secret $tc
@@ -55,7 +62,7 @@ function Get-MdeAuthorizationHeader {
 
 		Throw ("Failed to acquire token. Details below: {0}" -f (Get-Error -Newest 1).ToString())
 		return
-		
+
 	}
 
 	return @{ Authorization = "Bearer $tc" }
