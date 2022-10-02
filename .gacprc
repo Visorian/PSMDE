@@ -1,0 +1,9 @@
+{
+  "add": true,
+  "push": true,
+  "emoji": "emoji",
+  "editor": false,
+  "hooks": {
+    "postpush": ""
+  }
+}
