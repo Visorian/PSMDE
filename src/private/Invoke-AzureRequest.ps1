@@ -4,6 +4,7 @@ function Invoke-AzureRequest {
     [string]
     $uri
   )
+  Write-Verbose "Calling following URI - $uri"
   $reply = Invoke-RetryRequest -Method Get -Uri $uri
   $content = $reply.value
   while (-not [String]::IsNullOrEmpty($reply.'@odata.nextLink')) {
