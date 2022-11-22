@@ -23,7 +23,7 @@ function Get-MdeAuthorizationInfo {
       tokenExpired = $expired
       roles       = (Get-ParsedToken -token $tc).roles
     }
-    Out-VerboseHashTable -hashtable $resultObject
+    # Write-VerboseHashTable -hashtable $resultObject
     return $resultObject
   }
   Write-Verbose "No session token"

@@ -30,7 +30,7 @@
   Copyright         = '(c) Jan-Henrik Damaschke. All rights reserved.'
 
   # Description of the functionality provided by this module
-  Description       = 'Provides a PowerShell functions to interact with Microsoft Defender for Endpoint (MDE)'
+  Description       = 'PowerShell module for Microsoft Defender for Endpoint (MDE).'
 
   # Minimum version of the PowerShell engine required by this module
   PowerShellVersion = '7.0'

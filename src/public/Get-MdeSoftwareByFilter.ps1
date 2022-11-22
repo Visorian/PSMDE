@@ -9,7 +9,7 @@
   Author: Jan-Henrik Damaschke
 
 .PARAMETER filter
-  Optional. Specifies the filter for MDE software.
+  Specifies the filter for MDE software.
 
 .OUTPUTS
   PSCustomObject. The Get-MdeSoftwareByFilter function returns a list of or a single PSCustomObject containing the parsed MDE software object.

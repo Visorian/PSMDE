@@ -1,4 +1,4 @@
-function Out-VerboseHashTable {
+function Write-VerboseHashTable {
   [CmdletBinding()]
   param (
     [Parameter()]

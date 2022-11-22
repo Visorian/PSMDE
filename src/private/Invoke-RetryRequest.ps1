@@ -12,6 +12,7 @@ function Invoke-RetryRequest {
     [object]
     $body
   )
+  Write-Verbose "Invoking retry request with uri: $uri"
   $sleepDuration = 0
   $retry = $false
   $headers = Get-MdeAuthorizationHeader
@@ -29,7 +30,7 @@ function Invoke-RetryRequest {
       if ($_.Exception.Response.StatusCode.value__ -ne 429) { $retry = $false; $_; break }
       $sleepDuration = $sleepDuration -eq 0 ? 4 : $sleepDuration * 2
       $retry = $true
-      Write-Verbose "Retrying in $sleepDuration seconds"
+      Write-Verbose "API returned 429, retrying in $sleepDuration seconds"
       Start-Sleep -Seconds $sleepDuration
     } 
   } until (
