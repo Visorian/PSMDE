@@ -8,6 +8,9 @@
 .NOTES
   Author: Jan-Henrik Damaschke
 
+.LINK
+  https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-device-secure-score?view=o365-worldwide
+
 .OUTPUTS
   PSCustomObject. The Get-MdeConfigurationScore function returns a single PSCustomObject containing the parsed device secure score object.
 

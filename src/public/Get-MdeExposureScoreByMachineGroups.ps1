@@ -8,6 +8,9 @@
 .NOTES
   Author: Jan-Henrik Damaschke
 
+.LINK
+  https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/get-machine-group-exposure-score?view=o365-worldwide
+
 .OUTPUTS
   PSCustomObject. The Get-MdeExposureScore function returns a single PSCustomObject containing the parsed organizational exposure score object.
 
