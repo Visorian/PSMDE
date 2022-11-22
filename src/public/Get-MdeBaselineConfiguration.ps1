@@ -1,30 +1,30 @@
 <#
 .SYNOPSIS
-  Retrieves a list of all security baselines assessment profiles created by the organization.
+  Retrieves a list of all the possible security baselines assessment configurations and settings for all the available benchmarks.
 
 .DESCRIPTION
-  If no parameters are specified, returns all Defender for Endpoint baseline profiles.
+  If no parameters are specified, returns all Defender for Endpoint baseline configurations.
 
 .NOTES
   Author: Jan-Henrik Damaschke
 
 .PARAMETER filter
-  Optional. Specifies the filter for baseline profiles. A filter is supported for "id", "name", "operatingSystem", "operatingSystemVersion", "status", "settingsNumber", "passedDevices" and "totalDevices".
+  Optional. Specifies the filter for baseline configurations. A filter is supported for "id", "name", "operatingSystem", "operatingSystemVersion", "status", "settingsNumber", "passedDevices" and "totalDevices".
 
 .OUTPUTS
-  PSCustomObject. The Get-MdeBaselineProfile function returns a list of or a single PSCustomObject containing the parsed baseline profile objects.
+  PSCustomObject. The Get-MdeBaselineConfiguration function returns a list of or a single PSCustomObject containing the parsed baseline configuration objects.
 
 .EXAMPLE
-  $machines = Get-MdeBaselineProfile
+  $machines = Get-MdeBaselineConfiguration
 
 .EXAMPLE
-  $machines = Get-MdeBaselineProfile -filter "`$filter=id+eq+'123'"
+  $machines = Get-MdeBaselineConfiguration -filter "`$filter=id+eq+'123'"
 
 .ROLE
   @(@{permission = 'SecurityConfiguration.Read.All'; permissionType = 'Application'}, @{permission = 'SecurityBaselinesAssessment.Read.All'; permissionType = 'Application'}, @{permission = 'SecurityBaselinesAssessment.Read'; permissionType = 'Delegated'}, @{permission = 'SecurityConfiguration.Read'; permissionType = 'Delegated'})
 #>
 
-function Get-MdeBaselineProfile {
+function Get-MdeBaselineConfiguration {
   [CmdletBinding()]
   param (
     [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
@@ -38,7 +38,7 @@ function Get-MdeBaselineProfile {
     }
   }
   Process {
-    $uri = 'https://api.securitycenter.microsoft.com/api/baselineProfiles'
+    $uri = 'https://api.securitycenter.microsoft.com/api/baselineConfigurations'
     if ($filter) {
       $uri += "?$filter" -f $id
     }
