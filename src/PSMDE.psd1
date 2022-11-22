@@ -73,6 +73,13 @@
     'Add-MdeMachineTag'
     'Clear-MdeAuthorizationInfo'
     'Get-MdeAuthorizationInfo'
+    'Get-MdeBaselineComplianceAssessmentByMachine'
+    'Get-MdeBaselineComplianceAssessmentExport'
+    'Get-MdeBaselineConfiguration'
+    'Get-MdeBaselineProfile'
+    'Get-MdeConfigurationScore'
+    'Get-MdeExposureScore'
+    'Get-MdeExposureScoreByMachineGroups'
     'Get-MdeMachine'
     'Get-MdeMachineAlerts'
     'Get-MdeMachineByFilter'
@@ -83,6 +90,8 @@
     'Get-MdeMachineRecommendations'
     'Get-MdeMachineSoftware'
     'Get-MdeMachineVulnerabilities'
+    'Get-MdeRemediationTask'
+    'Get-MdeRemediationTaskMachines'
     'Get-MdeRoles'
     'Get-MdeSoftware'
     'Get-MdeSoftwareByFilter'
@@ -134,7 +143,7 @@
       ProjectUri = 'https://github.com/Visorian/PSMDE'
 
       # A URL to an icon representing this module.
-      IconUri = 'https://raw.githubusercontent.com/Visorian/PSMDE/main/icon/psmde.png'
+      IconUri    = 'https://raw.githubusercontent.com/Visorian/PSMDE/main/icon/psmde.png'
 
       # ReleaseNotes of this module
       # ReleaseNotes = ''
