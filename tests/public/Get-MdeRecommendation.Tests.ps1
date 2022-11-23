@@ -3,7 +3,7 @@ BeforeAll {
   Import-Module (Split-Path $PSCommandPath).replace('tests', 'src').Replace('public', 'PSMDE.psd1')
 }
 
-Describe "Get-MdeBaselineConfiguration" {
+Describe "Get-MdeRecommendation" {
 
   It 'Should have the PSMDE module loaded' {
     $module = Get-Module PSMDE
@@ -20,10 +20,13 @@ Describe "Get-MdeBaselineConfiguration" {
   It 'Should correctly create the request uri' {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { return $uri }
+      Mock Invoke-RetryRequest { return $uri }
       Mock Test-MdePermissions { return $true }
-      $filter = "`$filter=vendor+eq+'microsoft'"
-      Get-MdeBaselineConfiguration | Should -Be "https://api.securitycenter.microsoft.com/api/baselineConfigurations"
-      Get-MdeBaselineConfiguration -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/baselineConfigurations?$filter"
+      $id = '12345'
+      $filter = "`$filter=id+eq+'12345'"
+      Get-MdeRecommendation | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations"
+      Get-MdeRecommendation -id $id | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations/$id"
+      Get-MdeRecommendation -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations?$filter"
     }
   }
 }

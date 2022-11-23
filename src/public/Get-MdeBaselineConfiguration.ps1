@@ -40,7 +40,7 @@ function Get-MdeBaselineConfiguration {
   Process {
     $uri = 'https://api.securitycenter.microsoft.com/api/baselineConfigurations'
     if ($filter) {
-      $uri += "?$filter" -f $id
+      $uri += "?$filter"
     }
     return Invoke-AzureRequest -Uri $uri
   }
