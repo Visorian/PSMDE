@@ -1,0 +1,1 @@
+Get-ChildItem '../src/public/' | ForEach-Object { Write-Host "'$($_.BaseName)'" }

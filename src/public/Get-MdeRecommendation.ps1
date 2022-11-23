@@ -14,6 +14,9 @@
 .PARAMETER id
   Optional. Specifies the id of the target MDE recommendation.
 
+.PARAMETER filter
+  Optional. Specifies the filter for baseline configurations. A filter is supported for "id", "productName", "vendor", "recommendedVersion", "recommendationCategory", "subCategory", "severityScore", "remediationType", "recommendedProgram", "recommendedVendor", and "status".
+
 .EXAMPLE
   $recommendations = Get-MdeRecommendation
 
@@ -45,8 +48,7 @@ function Get-MdeRecommendation {
   }
   Process {
     if ($id) {
-      $uri = 'https://api.securitycenter.microsoft.com/api/recommendations/{0}' -f $id
-      return Invoke-RetryRequest -Method Get -Uri $uri
+      return Invoke-RetryRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/recommendations/$id"
     }
     $uri = 'https://api.securitycenter.microsoft.com/api/recommendations'
     if ($filter) {
