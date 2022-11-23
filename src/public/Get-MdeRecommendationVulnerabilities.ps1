@@ -15,9 +15,6 @@
   Optional. Specifies the id of the target MDE recommendation.
 
 .EXAMPLE
-  $recommendations = Get-MdeRecommendationVulnerabilities
-
-.EXAMPLE
   Get-MdeRecommendationVulnerabilities -id 'va-_-google-_-chrome'
 
 .ROLE

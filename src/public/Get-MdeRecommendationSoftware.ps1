@@ -15,9 +15,6 @@
   https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/list-recommendation-software?view=o365-worldwide
 
 .EXAMPLE
-  $recommendations = Get-MdeRecommendationSoftware
-
-.EXAMPLE
   Get-MdeRecommendationSoftware -id 'va-_-google-_-chrome'
 
 .ROLE

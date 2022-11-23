@@ -15,9 +15,6 @@
   Optional. Specifies the id of the target MDE recommendation.
 
 .EXAMPLE
-  $recommendations = Get-MdeRecommendationMachines
-
-.EXAMPLE
   Get-MdeRecommendationMachines -id 'va-_-google-_-chrome'
 
 .ROLE
