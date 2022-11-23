@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-64.55%25-yellow)
+![Code Coverage](https://img.shields.io/badge/coverage-63.98%25-yellow)
 
 ## Installation
 
@@ -104,6 +104,13 @@ These section provides an overview of the available functions and some examples 
 - Add-MdeMachineTag
 - Clear-MdeAuthorizationInfo
 - Get-MdeAuthorizationInfo
+- Get-MdeBaselineComplianceAssessmentByMachine
+- Get-MdeBaselineComplianceAssessmentExport
+- Get-MdeBaselineConfiguration
+- Get-MdeBaselineProfile
+- Get-MdeConfigurationScore
+- Get-MdeExposureScore
+- Get-MdeExposureScoreByMachineGroups
 - Get-MdeMachine
 - Get-MdeMachineAlerts
 - Get-MdeMachineByFilter
@@ -114,6 +121,8 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeMachineRecommendations
 - Get-MdeMachineSoftware
 - Get-MdeMachineVulnerabilities
+- Get-MdeRemediationTask
+- Get-MdeRemediationTaskMachines
 - Get-MdeRoles
 - Get-MdeSoftware
 - Get-MdeSoftwareByFilter
@@ -158,6 +167,7 @@ See [Contributing Guide](https://github.com/Visorian/PSMDE/blob/main/CONTRIBUTIN
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
 
 
 
