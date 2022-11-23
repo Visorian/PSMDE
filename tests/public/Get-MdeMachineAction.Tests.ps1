@@ -23,10 +23,10 @@ Describe "Get-MdeMachineAction" {
       Mock Invoke-RetryRequest { return $uri }
       Mock Test-MdePermissions { return $true }
       $id = 'CVE-2022-42075'
-      $filter = "`$filter=id+eq+'12345'"
+      $filter = "id+eq+'12345'"
       Get-MdeMachineAction | Should -Be "https://api.securitycenter.microsoft.com/api/machineactions"
       Get-MdeMachineAction -id $id | Should -Be "https://api.securitycenter.microsoft.com/api/machineactions/$id"
-      Get-MdeMachineAction -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/machineactions?$filter"
+      Get-MdeMachineAction -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/machineactions?`$filter=$filter"
     }
   }
 }

@@ -15,7 +15,7 @@
   Optional. Specifies the id of the target MDE machine action.
 
 .PARAMETER filter
-  Optional. Specifies the filter for baseline configurations. A filter is supported for  "id", "status", "machineId", "type", "requestor", and "creationDateTimeUtc".
+  Optional. Specifies the OData filter for baseline configurations. A filter is supported for  "id", "status", "machineId", "type", "requestor", and "creationDateTimeUtc".
 
 .EXAMPLE
   $result = Get-MdeMachineAction
@@ -24,7 +24,7 @@
   Get-MdeMachineAction -id "<GUID>"
 
 .EXAMPLE
-  Get-MdeMachineAction -filter "$filter=vendor+eq+'microsoft'"
+  Get-MdeMachineAction -filter "type+eq+'RunAntiVirusScan'"
 
 .ROLE
   @(@{permission = 'Machine.Read.All'; permissionType = 'Application'}, @{permission = 'Machine.ReadWrite.All'; permissionType = 'Application'}, @{permission = 'Machine.Read'; permissionType = 'Delegated'}, @{permission = 'Machine.ReadWrite'; permissionType = 'Delegated'})
@@ -52,7 +52,7 @@ function Get-MdeMachineAction {
     }
     $uri = 'https://api.securitycenter.microsoft.com/api/machineactions'
     if ($filter) {
-      $uri += "?$filter"
+      $uri += "?`$filter=$filter"
     }
     return Invoke-AzureRequest -Uri $uri
   }

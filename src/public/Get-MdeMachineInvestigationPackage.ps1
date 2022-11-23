@@ -9,22 +9,22 @@
   Author: Jan-Henrik Damaschke
 
 .LINK
-  https://learn.microsoft.com/en-us/microsoft-365/security/...
+  https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/collect-investigation-package?view=o365-worldwide
 
 .PARAMETER id
-  Optional. Specifies the id of the target MDE recommendation.
+  Specifies the id of the target machine for the investigation package.
+
+.PARAMETER comment
+  Comment to associate with the action.
 
 .EXAMPLE
   $result = Get-MdeMachineInvestigationPackage
 
 .EXAMPLE
-  Get-MdeMachineInvestigationPackage -id "<GUID>"
-
-.EXAMPLE
-  Get-MdeMachineInvestigationPackage -filter "$filter=vendor+eq+'microsoft'"
+  Get-MdeMachineInvestigationPackage -id "MACHINE_ID"
 
 .ROLE
-  @(@{permission = ''; permissionType = 'Application'}, @{permission = ''; permissionType = 'Delegated'})
+  @(@{permission = 'Machine.CollectForensics'; permissionType = 'Application'}, @{permission = 'Machine.CollectForensics'; permissionType = 'Delegated'})
 #>
 
 function Get-MdeMachineInvestigationPackage {
@@ -32,7 +32,10 @@ function Get-MdeMachineInvestigationPackage {
   param (
     [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
-    $id
+    $id,
+    [Parameter(Mandatory)]
+    [string]
+    $comment
   )
   Begin {
     if (-not (Test-MdePermissions -functionName $PSCmdlet.CommandRuntime)) {
@@ -41,7 +44,7 @@ function Get-MdeMachineInvestigationPackage {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/"
+    return Invoke-RetryRequest -Method Post -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/collectInvestigationPackage" -body (ConvertTo-Json -InputObject @{Comment = $comment })
   }
   End {}
 }

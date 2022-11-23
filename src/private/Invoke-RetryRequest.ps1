@@ -20,7 +20,7 @@ function Invoke-RetryRequest {
     try {
       $retry = $false
       if (@('put', 'patch', 'post') -contains $method.ToLower()) {
-        return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri -Body $body -ErrorAction Stop
+        return Invoke-RestMethod -Method $method -Headers $headers -ContentType 'application/json' -Uri $uri -Body $body -ErrorAction Stop
       }
       else {
         return Invoke-RestMethod -Method $method -Headers $headers -Uri $uri -ErrorAction Stop

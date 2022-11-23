@@ -9,7 +9,7 @@
   Author: Jan-Henrik Damaschke
 
 .PARAMETER filter
-  Optional. Specifies the filter for baseline profiles. A filter is supported for "id", "name", "operatingSystem", "operatingSystemVersion", "status", "settingsNumber", "passedDevices" and "totalDevices".
+  Optional. Specifies the OData filter for baseline profiles. A filter is supported for "id", "name", "operatingSystem", "operatingSystemVersion", "status", "settingsNumber", "passedDevices" and "totalDevices".
 
 .OUTPUTS
   PSCustomObject. The Get-MdeBaselineProfile function returns a list of or a single PSCustomObject containing the parsed baseline profile objects.
@@ -18,7 +18,7 @@
   $machines = Get-MdeBaselineProfile
 
 .EXAMPLE
-  $machines = Get-MdeBaselineProfile -filter "`$filter=id+eq+'123'"
+  $machines = Get-MdeBaselineProfile -filter "id+eq+'123'"
 
 .ROLE
   @(@{permission = 'SecurityConfiguration.Read.All'; permissionType = 'Application'}, @{permission = 'SecurityBaselinesAssessment.Read.All'; permissionType = 'Application'}, @{permission = 'SecurityBaselinesAssessment.Read'; permissionType = 'Delegated'}, @{permission = 'SecurityConfiguration.Read'; permissionType = 'Delegated'})
@@ -40,7 +40,7 @@ function Get-MdeBaselineProfile {
   Process {
     $uri = 'https://api.securitycenter.microsoft.com/api/baselineProfiles'
     if ($filter) {
-      $uri += "?$filter" -f $id
+      $uri += "?`$filter=$filter"
     }
     return Invoke-AzureRequest -Uri $uri
   }

@@ -15,7 +15,7 @@
   Optional. Specifies the id of the target MDE recommendation.
 
 .PARAMETER filter
-  Optional. Specifies the filter for baseline configurations. A filter is supported for "id", "productName", "vendor", "recommendedVersion", "recommendationCategory", "subCategory", "severityScore", "remediationType", "recommendedProgram", "recommendedVendor", and "status".
+  Optional. Specifies the OData filter for baseline configurations. A filter is supported for "id", "productName", "vendor", "recommendedVersion", "recommendationCategory", "subCategory", "severityScore", "remediationType", "recommendedProgram", "recommendedVendor", and "status".
 
 .EXAMPLE
   $recommendations = Get-MdeRecommendation
@@ -24,7 +24,7 @@
   Get-MdeRecommendation -id '<GUID>'
 
 .EXAMPLE
-  Get-MdeRecommendation -filter "`$filter=vendor+eq+'microsoft'"
+  Get-MdeRecommendation -filter "vendor+eq+'microsoft'"
 
 .ROLE
   @(@{permission = 'SecurityRecommendation.Read.All'; permissionType = 'Application'}, @{permission = 'SecurityRecommendation.Read'; permissionType = 'Delegated'})
@@ -52,7 +52,7 @@ function Get-MdeRecommendation {
     }
     $uri = 'https://api.securitycenter.microsoft.com/api/recommendations'
     if ($filter) {
-      $uri += "?$filter"
+      $uri += "?`$filter=$filter"
     }
     return Invoke-AzureRequest -Uri $uri
   }

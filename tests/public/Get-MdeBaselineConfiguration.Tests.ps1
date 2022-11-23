@@ -21,9 +21,9 @@ Describe "Get-MdeBaselineConfiguration" {
     InModuleScope PSMDE {
       Mock Invoke-AzureRequest { return $uri }
       Mock Test-MdePermissions { return $true }
-      $filter = "`$filter=vendor+eq+'microsoft'"
+      $filter = "vendor+eq+'microsoft'"
       Get-MdeBaselineConfiguration | Should -Be "https://api.securitycenter.microsoft.com/api/baselineConfigurations"
-      Get-MdeBaselineConfiguration -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/baselineConfigurations?$filter"
+      Get-MdeBaselineConfiguration -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/baselineConfigurations?`$filter=$filter"
     }
   }
 }

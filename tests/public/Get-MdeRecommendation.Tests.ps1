@@ -23,10 +23,10 @@ Describe "Get-MdeRecommendation" {
       Mock Invoke-RetryRequest { return $uri }
       Mock Test-MdePermissions { return $true }
       $id = '12345'
-      $filter = "`$filter=id+eq+'12345'"
+      $filter = "id+eq+'12345'"
       Get-MdeRecommendation | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations"
       Get-MdeRecommendation -id $id | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations/$id"
-      Get-MdeRecommendation -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations?$filter"
+      Get-MdeRecommendation -filter $filter | Should -Be "https://api.securitycenter.microsoft.com/api/recommendations?`$filter=$filter"
     }
   }
 }
