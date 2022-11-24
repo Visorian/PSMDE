@@ -32,7 +32,7 @@ function Invoke-RetryRequest {
       $retry = $true
       Write-Verbose "API returned 429, retrying in $sleepDuration seconds"
       Start-Sleep -Seconds $sleepDuration
-    } 
+    }
   } until (
     -not $retry
   )

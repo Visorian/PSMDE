@@ -38,7 +38,7 @@ function Get-MdeMachineAlerts {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/alerts"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/alerts"
   }
   End {}
 }

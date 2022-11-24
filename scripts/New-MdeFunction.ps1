@@ -59,7 +59,7 @@ function $name {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/"
   }
   End {}
 }

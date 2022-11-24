@@ -38,7 +38,7 @@ function Get-MdeMachineLogonUsers {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/logonusers"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/logonusers"
   }
   End {}
 }

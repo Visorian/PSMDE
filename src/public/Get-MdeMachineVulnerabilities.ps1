@@ -32,7 +32,7 @@ function Get-MdeMachineVulnerabilities {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/vulnerabilities"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/vulnerabilities"
   }
   End {}
 }

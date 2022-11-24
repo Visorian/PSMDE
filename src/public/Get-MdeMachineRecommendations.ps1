@@ -32,7 +32,7 @@ function Get-MdeMachineRecommendations {
     }
   }
   Process {
-    return Invoke-AzureRequest -Method Get -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/recommendations"
+    return Invoke-AzureRequest -Uri "https://api.securitycenter.microsoft.com/api/machines/$id/recommendations"
   }
   End {}
 }
