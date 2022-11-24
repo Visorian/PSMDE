@@ -12,7 +12,7 @@
   RootModule        = 'PSMDE.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.20.0'
+  ModuleVersion     = '0.19.0'
 
   # Supported PSEditions
   # CompatiblePSEditions = @()
@@ -72,6 +72,10 @@
   FunctionsToExport = @(
     'Add-MdeMachineTag'
     'Clear-MdeAuthorizationInfo'
+    'Disable-MdeMachineCodeExecutionRestriction'
+    'Disable-MdeMachineIsolation'
+    'Enable-MdeMachineCodeExecutionRestriction'
+    'Enable-MdeMachineIsolation'
     'Get-MdeAuthorizationInfo'
     'Get-MdeBaselineComplianceAssessmentByMachine'
     'Get-MdeBaselineComplianceAssessmentExport'
@@ -80,6 +84,7 @@
     'Get-MdeConfigurationScore'
     'Get-MdeExposureScore'
     'Get-MdeExposureScoreByMachineGroups'
+    'Get-MdeLiveResponseResult'
     'Get-MdeMachine'
     'Get-MdeMachineAction'
     'Get-MdeMachineAlerts'
@@ -87,6 +92,7 @@
     'Get-MdeMachineByIp'
     'Get-MdeMachineByTag'
     'Get-MdeMachineInvestigationPackage'
+    'Get-MdeMachineInvestigationPackageUri'
     'Get-MdeMachineLogonUsers'
     'Get-MdeMachineMissingKbs'
     'Get-MdeMachineRecommendations'
