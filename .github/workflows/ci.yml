@@ -98,7 +98,7 @@ jobs:
           delete_if_exists: true
 
       - name: Generate new tag version
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: mathieudutour/github-tag-action@v6.1
         id: tag_version
         with:
           github_token: ${{ secrets.PSMDE_REPO }}
@@ -141,7 +141,7 @@ jobs:
           branch: main
 
       - name: Bump version and create tag
-        uses: mathieudutour/github-tag-action@v6.0
+        uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.PSMDE_REPO }}
           release_branches: main

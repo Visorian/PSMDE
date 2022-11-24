@@ -116,9 +116,14 @@
     'Get-MdeVulnerability'
     'Get-MdeVulnerabilityByMachine'
     'Get-MdeVulnerabilityMachinesByVulnerability'
+    'Invoke-MdeMachineAntivirusScan'
+    'Invoke-MdeMachineLiveResponse'
     'New-MdeServicePrincipal'
+    'Remove-MdeMachine'
     'Remove-MdeMachineTag'
     'Set-MdeAuthorizationInfo'
+    'Stop-MdeMachineAction'
+    'Stop-MdeMachineFileExecution'
     'Update-MdeMachine'
   )
 
