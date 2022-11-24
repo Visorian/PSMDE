@@ -24,13 +24,17 @@
 function Update-MdeMachine {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(Mandatory, ParameterSetName = 'tags', ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(Mandatory, ParameterSetName = 'priority', ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(Mandatory, ParameterSetName = 'all', ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
     $id,
-    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'tags')]
+    [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'all')]
     [array]
     $tags,
-    [Parameter(ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'priority')]
+    [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'all')]
     [ValidateSet('Low', 'Normal', 'High')]
     [string]
     $priority
@@ -49,7 +53,8 @@ function Update-MdeMachine {
       $result = Invoke-RetryRequest -Method Patch -body (ConvertTo-Json -InputObject $body) -Uri "https://api.securitycenter.microsoft.com/api/machines/$id"
       Write-Verbose "Updated $id with $($body.Keys)"
       return $result
-    } else {
+    }
+    else {
       Throw "Neither tags nor priority parameter provided. Please provide at least one."
     }
   }

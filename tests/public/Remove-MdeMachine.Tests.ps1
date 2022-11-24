@@ -3,7 +3,7 @@ BeforeAll {
   Import-Module (Split-Path $PSCommandPath).replace('tests', 'src').Replace('public', 'PSMDE.psd1')
 }
 
-Describe "Remove-MdeMachineTag" {
+Describe "Remove-MdeMachine" {
 
   It 'Should have the PSMDE module loaded' {
     $module = Get-Module PSMDE
@@ -22,10 +22,10 @@ Describe "Remove-MdeMachineTag" {
       Mock Invoke-RetryRequest { return @{uri = $uri; body = $body } }
       Mock Test-MdePermissions { return $true }
       $id = '12345'
-      $tag = 'monitored'
-      $body = ConvertTo-Json -Depth 5 -InputObject @{ Value = $tag; Action = 'Remove' }
-      $result = Remove-MdeMachineTag -id $id -tag $tag
-      $result.uri | Should -Be "https://api.securitycenter.microsoft.com/api/machines/$id/tags"
+      $comment = 'Comment'
+      $body = ConvertTo-Json -Depth 5 -InputObject @{comment = $comment }
+      $result = Remove-MdeMachine -id $id -comment $comment
+      $result.uri | Should -Be "https://api.securitycenter.microsoft.com/api/machines/$id/offboard"
       $result.body | Should -Be $body
     }
   }
