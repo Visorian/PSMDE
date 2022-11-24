@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-67.54%25-yellow)
+![Code Coverage](https://img.shields.io/badge/coverage-95.31%25-yellow)
 
 ## Installation
 
@@ -115,6 +115,7 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeConfigurationScore
 - Get-MdeExposureScore
 - Get-MdeExposureScoreByMachineGroups
+- Get-MdeLibraryFiles
 - Get-MdeLiveResponseResult
 - Get-MdeMachine
 - Get-MdeMachineAction
@@ -147,9 +148,14 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeVulnerability
 - Get-MdeVulnerabilityByMachine
 - Get-MdeVulnerabilityMachinesByVulnerability
+- Invoke-MdeMachineAntivirusScan
+- Invoke-MdeMachineLiveResponse
 - New-MdeServicePrincipal
+- Remove-MdeMachine
 - Remove-MdeMachineTag
 - Set-MdeAuthorizationInfo
+- Stop-MdeMachineAction
+- Stop-MdeMachineFileExecution
 - Update-MdeMachine
 
 </details>
@@ -179,6 +185,7 @@ See [Contributing Guide](https://github.com/Visorian/PSMDE/blob/main/CONTRIBUTIN
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
 
 
 
