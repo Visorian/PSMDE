@@ -18,7 +18,7 @@
   Comment to associate with the action.
 
 .PARAMETER scanType
-  Optional. Defines the type of the Scan. Required. Allowed values are: 'Quick' or 'Full' (default: 'Quick').
+  Optional. Defines the type of the Scan. Allowed values are: 'Quick' or 'Full' (default: 'Quick').
 
 .EXAMPLE
   Invoke-MdeMachineAntivirusScan -id "MACHINE_ID" -comment "Your comment"
