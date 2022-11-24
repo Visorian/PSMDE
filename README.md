@@ -4,7 +4,7 @@
 
 [![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-62.94%25-yellow)
+![Code Coverage](https://img.shields.io/badge/coverage-62.64%25-yellow)
 
 ## Installation
 
@@ -103,6 +103,10 @@ These section provides an overview of the available functions and some examples 
 
 - Add-MdeMachineTag
 - Clear-MdeAuthorizationInfo
+- Disable-MdeMachineCodeExecutionRestriction
+- Disable-MdeMachineIsolation
+- Enable-MdeMachineCodeExecutionRestriction
+- Enable-MdeMachineIsolation
 - Get-MdeAuthorizationInfo
 - Get-MdeBaselineComplianceAssessmentByMachine
 - Get-MdeBaselineComplianceAssessmentExport
@@ -111,6 +115,7 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeConfigurationScore
 - Get-MdeExposureScore
 - Get-MdeExposureScoreByMachineGroups
+- Get-MdeLiveResponseResult
 - Get-MdeMachine
 - Get-MdeMachineAction
 - Get-MdeMachineAlerts
@@ -118,6 +123,7 @@ These section provides an overview of the available functions and some examples 
 - Get-MdeMachineByIp
 - Get-MdeMachineByTag
 - Get-MdeMachineInvestigationPackage
+- Get-MdeMachineInvestigationPackageUri
 - Get-MdeMachineLogonUsers
 - Get-MdeMachineMissingKbs
 - Get-MdeMachineRecommendations
@@ -173,6 +179,7 @@ See [Contributing Guide](https://github.com/Visorian/PSMDE/blob/main/CONTRIBUTIN
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
 
 
 
