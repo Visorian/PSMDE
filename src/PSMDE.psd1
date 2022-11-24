@@ -84,6 +84,7 @@
     'Get-MdeConfigurationScore'
     'Get-MdeExposureScore'
     'Get-MdeExposureScoreByMachineGroups'
+    'Get-MdeLibraryFiles'
     'Get-MdeLiveResponseResult'
     'Get-MdeMachine'
     'Get-MdeMachineAction'

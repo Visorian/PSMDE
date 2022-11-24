@@ -64,8 +64,8 @@ jobs:
         continue-on-error: true
         run: |
           [xml]$coverage = Get-Content .\coverage.xml
-          [int]$covered = $coverage.report.counter | Where-Object type -eq 'INSTRUCTION' | select -ExpandProperty 'covered'
-          [int]$missed = $coverage.report.counter | Where-Object type -eq 'INSTRUCTION' | select -ExpandProperty 'missed'
+          [int]$covered = $coverage.report.counter | Where-Object type -eq 'METHOD' | select -ExpandProperty 'covered'
+          [int]$missed = $coverage.report.counter | Where-Object type -eq 'METHOD' | select -ExpandProperty 'missed'
           [int]$sum = $covered + $missed
           $coveredPercent = [Math]::Floor(($covered * 100 / $sum) * 100) / 100
           $readme = Get-Content ./README.md
