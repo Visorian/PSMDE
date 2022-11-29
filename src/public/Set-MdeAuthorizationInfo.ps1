@@ -4,6 +4,7 @@
 
 .DESCRIPTION
   Set the authorization information that is used to get a valid MDE token. You can use a service principal (app registration) or directly provide a token.
+
 .NOTES
   Author: Jan-Henrik Damaschke
 
@@ -22,11 +23,23 @@
 .PARAMETER token
   Mandatory. You can provide the token directly with this parameter. If used, none of the other parameters can be used.
 
+.PARAMETER configurationFile
+  You can provide a JSON parameter file containing the values "mdeAppId","mdeTenantId" and "mdeAppSecret".
+
+.PARAMETER fromEnv
+  If this switch is provided, the app registration credentials will be taken from the environment variables "MDE_APP_ID", "MDE_TENANT_ID", "MDE_APP_SECRET"
+
 .LINK
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/exposed-apis-create-app-webapp?view=o365-worldwide
 
 .EXAMPLE
   Set-MdeAuthorizationInfo -tenantId '00000000-0000-0000-0000-000000000000' -appId '00000000-0000-0000-0000-000000000000' -appSecret 'APP_SECRET'
+
+.EXAMPLE
+  Set-MdeAuthorizationInfo -fromEnv
+
+.EXAMPLE
+  Set-MdeAuthorizationInfo -configurationFile "./mdeConfig.json"
 #>
 
 function Set-MdeAuthorizationInfo {
@@ -42,12 +55,46 @@ function Set-MdeAuthorizationInfo {
     [string]
     $appSecret,
     [Parameter(ParameterSetName = 'ServicePrincipal')]
+    [Parameter(ParameterSetName = 'ConfigurationFile')]
     [switch]
     $noTokenRefresh,
     [Parameter(ParameterSetName = 'Token', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
     [string]
-    $token
+    $token,
+    [Parameter(ParameterSetName = 'EnvironmentVariables', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [switch]
+    $fromEnv,
+    [Parameter(ParameterSetName = 'ConfigurationFile', Mandatory, ValueFromPipelineByPropertyName, ValueFromPipeline)]
+    [ValidateScript(
+      { Test-Path ($_) },
+      ErrorMessage = "Invalid configuration file path"
+    )]
+    [string]
+    $configurationFile
   )
+  Begin {
+    if ($configurationFile) {
+      try {
+        $configuration = Get-Content $configurationFile | ConvertFrom-Json
+        $tenantId = $configuration.mdeTenantId
+        $appId = $configuration.mdeAppId
+        $appSecret = $configuration.mdeAppSecret
+      }
+      catch {
+        Write-Error "Error parsing the configuration file"
+      }
+    }
+    if ($fromEnv) {
+      @('MDE_APP_ID', 'MDE_TENANT_ID', 'MDE_APP_SECRET') | ForEach-Object {
+        if (Test-Path env:$_) {
+          Set-Variable -Name $_.Replace('MDE_', '').Replace('_', '').ToLower() -Value (Get-Content env:$_)
+        }
+        else {
+          throw "Environment variable $_ not found"
+        }
+      }
+    }
+  }
   Process {
     if ($token) {
       $script:tokenCache = New-AesSessionSecret -secret $token
@@ -60,6 +107,7 @@ function Set-MdeAuthorizationInfo {
     }
     if (-not $noTokenRefresh) { $script:tokenCache = $null; Write-Verbose "Refreshing access token"; $null = Get-MdeAuthorizationHeader }
   }
+  End {}
 }
 # SIG # Begin signature block
 # MIIVigYJKoZIhvcNAQcCoIIVezCCFXcCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB

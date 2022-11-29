@@ -37,6 +37,29 @@ Describe "Set-MdeAuthorizationInfo" {
     }
   }
 
+  It 'Should set module variables for service principal from environment variables' {
+    InModuleScope PSMDE {
+      # Setup
+      Mock Get-MdeAuthorizationHeader { }
+      $script:tenantId = ''
+      $script:appId = ''
+      $script:appSecret = ''
+      $ti = '123'
+      $ai = '456'
+      $as = '789'
+      $env:MDE_APP_ID = $ai
+      $env:MDE_APP_SECRET = $as
+      $env:MDE_TENANT_ID = $ti
+
+      # Test
+      Set-MdeAuthorizationInfo -fromEnv
+      Get-AesSessionSecret -cipherText $script:tenantId | Should -Be $ti
+      Get-AesSessionSecret -cipherText $script:appId | Should -Be $ai
+      Get-AesSessionSecret -cipherText $script:appSecret | Should -Be $as
+      Should -Invoke Get-MdeAuthorizationHeader
+    }
+  }
+
   It 'Should set module variable for token' {
     InModuleScope PSMDE {
       # Setup
