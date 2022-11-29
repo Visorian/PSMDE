@@ -21,6 +21,17 @@ foreach ($script in ($privateScripts + $publicScripts)) {
   }
 }
 
+# Add PSReadLine handler to avoid credentials being saved in the command history
+
+$scriptBlock = {
+  param(
+    [string]
+    $line
+  )
+  return $line.ToLower().StartsWith('set-mdeauthorizationinfo') ? $false : $true
+}
+Set-PSReadlineOption -AddToHistoryHandler $scriptBlock
+
 Export-ModuleMember -Function $publicScripts.BaseName
 
 # SIG # Begin signature block

@@ -52,5 +52,7 @@ function Get-MdeAuthorizationHeader {
     Throw ("Failed to acquire token. Details below: {0}" -f (Get-Error -Newest 1).ToString())
   }
 
+  # Clear command history of potential credentials
+  Clear-History -CommandLine 'Set-MdeAuthorizationInfo*'
   return @{ Authorization = "Bearer $tc" }
 }
