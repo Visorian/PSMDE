@@ -4264,6 +4264,32 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Set-MdeAuthorizationInfo</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>noTokenRefresh</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill noTokenRefresh Description }}</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>configurationFile</maml:name>
+          <maml:description>
+            <maml:para>You can provide a JSON parameter file containing the values "mdeAppId","mdeTenantId" and "mdeAppSecret".</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-MdeAuthorizationInfo</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
           <maml:name>token</maml:name>
           <maml:description>
@@ -4275,6 +4301,20 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-MdeAuthorizationInfo</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+          <maml:name>fromEnv</maml:name>
+          <maml:description>
+            <maml:para>If this switch is provided, the app registration credentials will be taken from the environment variables "MDE_APP_ID", "MDE_TENANT_ID", "MDE_APP_SECRET"</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -4331,6 +4371,30 @@
         <maml:name>token</maml:name>
         <maml:description>
           <maml:para>Mandatory. You can provide the token directly with this parameter. If used, none of the other parameters can be used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>fromEnv</maml:name>
+        <maml:description>
+          <maml:para>If this switch is provided, the app registration credentials will be taken from the environment variables "MDE_APP_ID", "MDE_TENANT_ID", "MDE_APP_SECRET"</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="named" aliases="none">
+        <maml:name>configurationFile</maml:name>
+        <maml:description>
+          <maml:para>You can provide a JSON parameter file containing the values "mdeAppId","mdeTenantId" and "mdeAppSecret".</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
