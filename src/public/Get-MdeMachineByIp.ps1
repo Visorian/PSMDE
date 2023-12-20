@@ -11,6 +11,12 @@
 .LINK
   https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/find-machines-by-ip?view=o365-worldwide
 
+.PARAMETER ip
+  The IP address of the machine to find.
+
+.PARAMETER timestamp
+  The timestamp of the machine to find. Defaults to current time, must be in the past 30 days.
+
 .EXAMPLE
   Get-MdeMachineByIp -ip '192.168.1.1'
 
