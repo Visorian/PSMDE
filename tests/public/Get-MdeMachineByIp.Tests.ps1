@@ -22,8 +22,10 @@ Describe "Get-MdeMachineByIp" {
       Mock Invoke-AzureRequest { return $uri }
       Mock Test-MdePermissions { return $true }
       $ip = '192.168.1.1'
-      $timestamp = [datetime]::Parse('2022-12-12T12:12:12')
-      Get-MdeMachineByIp -ip $ip -timestamp $timestamp | Should -Be "https://api.securitycenter.microsoft.com/api/machines/findbyip(ip='$ip',timestamp=2022-12-12T12:12:12Z)"
+      $tooOldTimestamp = [datetime]::Parse('2022-12-12T12:12:12')
+      $timestamp = ([DateTime]::now).AddDays(-15)
+      { Get-MdeMachineByIp -ip $ip -timestamp $tooOldTimestamp } | Should -Throw
+      Get-MdeMachineByIp -ip $ip -timestamp $timestamp | Should -Be "https://api.securitycenter.microsoft.com/api/machines/findbyip(ip='$ip',timestamp=$($timestamp.toString('yyyy-MM-ddThh:mm:ssZ')))"
     }
   }
 }
