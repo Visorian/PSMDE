@@ -62,4 +62,14 @@ Describe 'Test-MdePermissions' {
       }
     }
   }
+
+  It 'Should handle and return $false when roles are null' {
+    InModuleScope PSMDE {
+      Mock Get-MdeAuthorizationHeader { }
+      Mock Get-MdeAuthorizationInfo { return $null }
+      $warning = $( & Test-MdePermissions -functionName 'Get-MdeMachine' ) 3>&1
+      $warning.message | Should -Be 'No roles found, are you logged in?'
+      Should -Invoke Get-MdeAuthorizationInfo
+    }
+  }
 }
