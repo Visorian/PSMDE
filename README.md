@@ -185,3 +185,4 @@ See [Contributing Guide](https://github.com/Visorian/PSMDE/blob/main/CONTRIBUTIN
 Made with :heart:
 
 Published under [MIT License](./LICENCE).
+
