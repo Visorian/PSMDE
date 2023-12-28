@@ -2,9 +2,10 @@
 
 # Microsoft Defender for Endpoint (MDE) PowerShell module
 
-[![ci](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml/badge.svg)](https://github.com/Visorian/PSMDE/actions/workflows/ci.yml)
-[![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PSMDE)](https://www.powershellgallery.com/packages/PSMDE)
-![Code Coverage](https://img.shields.io/badge/coverage-93.75%25-yellow)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/Visorian/PSMDE/ci.yml?logo=github&label=CI%2FCD&labelColor=181818)
+![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/PSMDE?labelColor=181818&color=4578d2&label=PS%20Gallery%20Version)
+![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/PSMDE?labelColor=181818&color=4578d2&label=PS%20Gallery%20Downloads)
+![Code Coverage](https://img.shields.io/badge/coverage-93.75%25-yellow?labelColor=181818&color=4578d2&label=Test%20Coverage)
 
 ## Installation
 
